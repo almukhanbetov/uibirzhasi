@@ -1,0 +1,39 @@
+services:
+  app:
+    image: almuko/ddl-app:latest
+    container_name: ddl_app
+    working_dir: /var/www
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - appdata:/var/www   # ⭐ ОБЩИЙ VOLUME
+    depends_on:
+      - db
+
+  web:
+    image: nginx:alpine
+    container_name: ddl_web
+    restart: always
+    ports:
+      - "8081:80"
+    volumes:
+      - appdata:/var/www   # ⭐ ТОТ ЖЕ VOLUME
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+
+  db:
+    image: postgres:17
+    container_name: ddl_db
+    restart: always
+    environment:
+      POSTGRES_DB: ddl
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Zxcvbnm123
+    volumes:
+      - ddl_pgdata:/var/lib/postgresql/data
+
+volumes:
+  ddl_pgdata:
+  appdata:   # ⭐ ОБЩИЙ
