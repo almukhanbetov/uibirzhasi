@@ -1,27 +1,37 @@
 FROM php:8.3-fpm
 
+# Устанавливаем пакеты
 RUN apt update && apt install -y \
     nano \
-    libpq-dev \
+    bash \
     zip unzip git curl \
-    && docker-php-ext-install pdo_pgsql pdo_mysql
-WORKDIR /var/www
+    libpq-dev \
+    libzip-dev \
+    libpng-dev \
+    libonig-dev \
+    && docker-php-ext-install pdo_mysql pdo_pgsql
 
-# composer
-COPY composer.json composer.lock ./
+# Устанавливаем Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# 🔒 БЕЗ scripts (artisan не нужен)
+WORKDIR /var/www
+
+# Копируем файлы зависимостей
+COPY composer.json composer.lock ./
+
+# Ставим зависимости БЕЗ dev и scripts
 RUN composer install \
     --no-dev \
     --optimize-autoloader \
     --no-scripts
 
-# копируем Laravel
+# Копируем весь проект
 COPY . .
 
-# вручную package:discover (artisan уже есть)
+# Выполняем package:discover (если artisan есть)
 RUN php artisan package:discover --ansi || true
 
+# Права
 RUN chown -R www-data:www-data /var/www
+
 USER www-data
