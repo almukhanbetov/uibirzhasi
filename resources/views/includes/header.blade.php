@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -8,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('assets/favicon.ico') }}" rel="icon">
     <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -23,6 +24,7 @@
     <link href="{{ asset('assets/vendor/drift-zoom/drift-basic.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 </head>
+
 <body class="index-page">
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div
