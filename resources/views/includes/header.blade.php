@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link href="{{ asset('assets/favicon.ico') }}" rel="icon">
+    <link href="{{ asset('favicon.ico') }}" rel="icon">
     <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
