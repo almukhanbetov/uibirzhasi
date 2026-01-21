@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'verified',
         'role_id',
+        'accepted_offer',
+        'accepted_offer_at',
+        'accepted_offer_ip',
+        'accepted_offer_version',
     ];
 
     /**
@@ -32,7 +36,10 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    protected $casts = [
+        'accepted_offer' => 'boolean',
+        'accepted_offer_at' => 'datetime',
+    ];
     /**
      * Get the attributes that should be cast.
      *

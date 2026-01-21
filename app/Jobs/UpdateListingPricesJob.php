@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Jobs;
-
 use App\Models\Listing;
 use App\Models\PriceHistory;
 use App\Services\MatchMonitorService;
@@ -12,17 +10,14 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Throwable;
-
 class UpdateListingPricesJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
     public function handle(): void
     {
         Log::info('PRICE JOB STARTED');
 
         try {
-
             // Берём только активные объявления
             $listings = Listing::where('status', Listing::STATUS_ACTIVE)
                 ->where(function ($q) {
@@ -30,9 +25,7 @@ class UpdateListingPricesJob implements ShouldQueue
                         ->orWhere('last_price_change_at', '<', now()->subMinutes(5));
                 })
                 ->get();
-
             foreach ($listings as $listing) {
-
                 $old = $listing->price_current;
                 $pct = $listing->price_step_pct ?? 1; // по умолчанию 1%
 
@@ -42,7 +35,6 @@ class UpdateListingPricesJob implements ShouldQueue
                         $listing->price_current * (1 - $pct / 100)
                     );
                 }
-
                 // 🟦 ПОКУПКА — цена ПОВЫШАЕТСЯ на 1%
                 if ($listing->deal_type == Listing::DEAL_BUY) {
                     $listing->price_current = round(

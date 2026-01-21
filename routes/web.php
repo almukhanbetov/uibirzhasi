@@ -13,7 +13,10 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Admin\AdminMatchController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DepositController;
 use App\Http\Controllers\MatchController;
+use App\Http\Controllers\OfferController;
 use Illuminate\Support\Facades\Auth;
 
 // Route::middleware('auth')->prefix('draft')->name('draft.')->group(function () {
@@ -40,6 +43,8 @@ Route::get('/listings/ajax', [ListingController::class, 'ajaxSearch'])->name('li
 Route::get('/profile/create', [ListingController::class, 'create'])->name('listing.create');
 Route::post('/profile/create', [ListingController::class, 'store'])->name('listing.store');
 
+Route::get('/offer', fn () => view('pages.offer'))->name('offer');
+
 Route::get('/regions', [LocationController::class, 'regions']);
 Route::get('/cities/{region}', [LocationController::class, 'cities']);
 Route::get('/districts/{city}', [LocationController::class, 'districts']);
@@ -47,6 +52,22 @@ Route::middleware('auth')->group(function () {
     Route::post('/matches/{match}/deposit', [\App\Http\Controllers\MatchDepositController::class, 'store'])
         ->name('matches.deposit');
 });
+Route::middleware(['auth', 'offer.accepted'])->group(function () {
+    // Личный кабинет
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+    // Недвижимость
+    Route::resource('listings', ListingController::class);
+    // Запросы покупателей
+    // Route::resource('requests', BuyRequestController::class);
+    // Депозиты / сделки
+    Route::post('/matches/{id}/deposit', [DepositController::class, 'store']);
+
+});
+Route::get('/offer/accept', [OfferController::class, 'show'])
+    ->middleware('auth')
+    ->name('offer.accept');
+Route::post('/offer/accept', [OfferController::class, 'accept'])
+    ->middleware('auth');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');

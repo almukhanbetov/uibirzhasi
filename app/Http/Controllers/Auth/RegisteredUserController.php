@@ -58,6 +58,7 @@ class RegisteredUserController extends Controller
             'name'                  => ['required', 'string', 'max:255'],
             'phone'                 => ['required', 'string', 'regex:/^\+7\d{10}$/', 'unique:users,phone'],
             'password'              => ['required', 'confirmed', Rules\Password::defaults()],
+            'accepted_offer'        => ['accepted'],
         ], [
             'name.required'     => 'Введите имя.',
             'phone.required'    => 'Введите номер телефона.',
@@ -74,6 +75,12 @@ class RegisteredUserController extends Controller
             'name'     => $validated['name'],
             'phone'    => $request->input('phone'),
             'password' => Hash::make($validated['password']),
+
+            // 🔥 ОФЕРТА — ЯВНО
+            'accepted_offer' => true,
+            'accepted_offer_at' => now(),
+            'accepted_offer_ip' => $request->ip(),
+            'accepted_offer_version' => 'v1.0',
         ]);
 
         // --- 🔑 Авторизуем сразу после регистрации
