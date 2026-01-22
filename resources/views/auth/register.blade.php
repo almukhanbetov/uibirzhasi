@@ -112,7 +112,7 @@
         </div>
     </div>
     {{-- SCRIPT --}}
-    <script>
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', () => {
 
             /* -------------------------------
@@ -187,6 +187,6 @@
             };
 
         });
-    </script>
+    </script> --}}
 
 @endsection
