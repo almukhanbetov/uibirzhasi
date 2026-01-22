@@ -29,7 +29,7 @@
         <div
             class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
             <a href="{{ route('welcome') }}" class="logo d-flex align-items-center me-auto me-xl-0">
-                <h1 class="sitename">ТОО "CPA"</h1>
+                <h1 class="sitename">"CPA"</h1>
             </a>
             <nav id="navmenu" class="navmenu">
                 <ul>
