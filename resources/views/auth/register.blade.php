@@ -7,7 +7,7 @@
     <section id="register">
         <div class="container">
             <div class="row">
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('register') }}" id="registerForm">
                     @csrf
                     <div class="col-md-6 mx-auto">
                         <div class="login_1">
@@ -82,9 +82,7 @@
     </section>
     {{-- OFFER MODAL --}}
     <div id="offerModal" class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50">
-
         <div class="bg-white w-full max-w-3xl max-h-[80vh] rounded-xl border border-slate-200 flex flex-col shadow-xl">
-
             {{-- Header --}}
             <div class="flex justify-between items-center px-6 py-4 border-b border-slate-200">
                 <h2 class="text-lg font-semibold text-slate-900">
@@ -94,14 +92,12 @@
                     ✕
                 </button>
             </div>
-
             {{-- Content --}}
             <div class="p-6 overflow-y-auto">
                 <div class="prose prose-sm max-w-none text-slate-800">
                     @include('offer-content')
                 </div>
             </div>
-
             {{-- Footer --}}
             <div class="px-6 py-4 border-t border-slate-200 flex justify-end gap-3">
                 <button onclick="closeOfferModal()"
@@ -113,54 +109,84 @@
                     Я принимаю
                 </button>
             </div>
-
         </div>
     </div>
-
-
     {{-- SCRIPT --}}
     <script>
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* -------------------------------
+             * FORM VALIDATION (PUBLIC OFFER)
+             * ------------------------------- */
+            const form = document.getElementById('registerForm');
             const checkbox = document.getElementById('offerCheckbox');
             const error = document.getElementById('offerError');
             const block = document.getElementById('offerBlock');
 
-            if (!checkbox.checked) {
-                e.preventDefault();
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    if (!checkbox || !checkbox.checked) {
+                        e.preventDefault();
 
-                error.classList.remove('hidden');
-                block.classList.add('border', 'border-red-500', 'rounded-lg', 'p-2');
+                        if (error) {
+                            error.classList.remove('hidden');
+                        }
 
-                checkbox.focus();
+                        if (block) {
+                            block.classList.add(
+                                'border',
+                                'border-red-500',
+                                'rounded-lg',
+                                'p-2'
+                            );
+                        }
+
+                        checkbox?.focus();
+                    }
+                });
             }
+
+            /* -------------------------------
+             * OFFER MODAL CONTROLS
+             * ------------------------------- */
+            const modal = document.getElementById('offerModal');
+
+            window.openOfferModal = function() {
+                if (!modal) return;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.classList.add('overflow-hidden');
+            };
+
+            window.closeOfferModal = function() {
+                if (!modal) return;
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.classList.remove('overflow-hidden');
+            };
+
+            window.acceptOffer = function() {
+                if (checkbox) {
+                    checkbox.checked = true;
+                }
+
+                if (error) {
+                    error.classList.add('hidden');
+                }
+
+                if (block) {
+                    block.classList.remove(
+                        'border',
+                        'border-red-500',
+                        'rounded-lg',
+                        'p-2'
+                    );
+                }
+
+                window.closeOfferModal();
+            };
+
         });
-
-        // --------------------
-        // OFFER MODAL
-        // --------------------
-
-        function openOfferModal() {
-            const modal = document.getElementById('offerModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeOfferModal() {
-            const modal = document.getElementById('offerModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function acceptOffer() {
-            document.getElementById('offerCheckbox').checked = true;
-
-            const error = document.getElementById('offerError');
-            const block = document.getElementById('offerBlock');
-
-            error.classList.add('hidden');
-            block.classList.remove('border', 'border-red-500', 'p-2');
-
-            closeOfferModal();
-        }
     </script>
+
 @endsection
