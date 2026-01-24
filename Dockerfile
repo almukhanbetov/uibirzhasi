@@ -1,3 +1,6 @@
+# -------------------------------
+# 1️⃣ Frontend build (Vite)
+# -------------------------------
 FROM node:22-alpine AS node-builder
 WORKDIR /app
 
@@ -20,23 +23,24 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_pgsql zip \
     && rm -rf /var/lib/apt/lists/*
 
-# Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-# Сначала зависимости Composer (быстрее кешируется)
+# ✅ сначала composer зависимости (без scripts!)
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
-# Копируем весь проект
+# ✅ копируем проект
 COPY . .
 
-# ✅ Копируем Vite build внутрь public/build
+# ✅ теперь artisan уже есть → можно запускать discover
+RUN php artisan package:discover --ansi || true
+
+# ✅ копируем Vite build
 COPY --from=node-builder /app/public/build /var/www/public/build
 
-# Права
+# ✅ права
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 CMD ["php-fpm"]
-
