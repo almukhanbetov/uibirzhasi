@@ -6,8 +6,7 @@ Alpine.start();
  * ✅ OFFER MODAL GLOBAL FUNCTIONS
  * Важно: inline onclick="..." ищет функции в window
  */
-window.openOfferModal = function () {
-    alert("svsdvsdvdvsvsv")
+window.openOfferModal = function () {  
     const modal = document.getElementById("offerModal");
     if (!modal) return;
     modal.classList.remove("hidden");
