@@ -1,37 +1,66 @@
-import './bootstrap';
-import Alpine from 'alpinejs';
+import "./bootstrap";
+import Alpine from "alpinejs";
+
 window.Alpine = Alpine;
 Alpine.start();
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('registerForm');
+
+// ✅ открытие модалки оферты
+window.openOfferModal = function () {
+    const modal = document.getElementById("offerModal");
+    if (!modal) return;
+
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+};
+
+// ✅ закрытие модалки оферты
+window.closeOfferModal = function () {
+    const modal = document.getElementById("offerModal");
+    if (!modal) return;
+
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+};
+
+// ✅ нажали "Я принимаю" внутри модалки
+window.acceptOffer = function () {
+    const checkbox = document.getElementById("offerCheckbox");
+    const error = document.getElementById("offerError");
+    const block = document.getElementById("offerBlock");
+
+    if (checkbox) checkbox.checked = true;
+
+    // ✅ скрыть ошибку (bootstrap)
+    if (error) error.classList.add("d-none");
+
+    // ✅ убрать рамку ошибки (если добавляли)
+    if (block) block.classList.remove("border", "border-danger", "p-2");
+
+    window.closeOfferModal();
+};
+
+// ✅ Проверка чекбокса при отправке формы
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("registerForm");
     if (!form) return;
-    const checkbox = document.getElementById('offerCheckbox');
-    const error = document.getElementById('offerError');
-    const block = document.getElementById('offerBlock');
-    const modal = document.getElementById('offerModal');
-    // ===== VALIDATION =====
-    form.addEventListener('submit', (e) => {
+
+    const checkbox = document.getElementById("offerCheckbox");
+    const error = document.getElementById("offerError");
+    const block = document.getElementById("offerBlock");
+
+    if (!checkbox || !error || !block) return;
+
+    form.addEventListener("submit", (e) => {
         if (!checkbox.checked) {
             e.preventDefault();
-            error.classList.remove('hidden');
-            block.classList.add('border', 'border-red-500', 'rounded-lg', 'p-2');
+
+            // ✅ показать ошибку
+            error.classList.remove("d-none");
+
+            // ✅ рамка вокруг блока
+            block.classList.add("border", "border-danger", "p-2", "rounded");
+
             checkbox.focus();
         }
     });
-    // ===== MODAL FUNCTIONS =====
-    window.openOfferModal = () => {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-    };
-    window.closeOfferModal = () => {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    };
-    window.acceptOffer = () => {
-        checkbox.checked = true;
-        error.classList.add('hidden');
-        block.classList.remove('border', 'border-red-500', 'p-2');
-        closeOfferModal();
-    };
-
 });
