@@ -4,63 +4,67 @@ import Alpine from "alpinejs";
 window.Alpine = Alpine;
 Alpine.start();
 
-// // ✅ открытие модалки оферты
-// window.openOfferModal = function () {
-//     const modal = document.getElementById("offerModal");
-//     if (!modal) return;
+/**
+ * ✅ OFFER MODAL GLOBAL FUNCTIONS
+ * Важно: inline onclick="..." ищет функции в window
+ */
 
-//     modal.classList.remove("hidden");
-//     modal.classList.add("flex");
-// };
+window.openOfferModal = function () {
+    const modal = document.getElementById("offerModal");
+    if (!modal) return;
 
-// // ✅ закрытие модалки оферты
-// window.closeOfferModal = function () {
-//     const modal = document.getElementById("offerModal");
-//     if (!modal) return;
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+};
 
-//     modal.classList.add("hidden");
-//     modal.classList.remove("flex");
-// };
+window.closeOfferModal = function () {
+    const modal = document.getElementById("offerModal");
+    if (!modal) return;
 
-// // ✅ нажали "Я принимаю" внутри модалки
-// window.acceptOffer = function () {
-//     const checkbox = document.getElementById("offerCheckbox");
-//     const error = document.getElementById("offerError");
-//     const block = document.getElementById("offerBlock");
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+};
 
-//     if (checkbox) checkbox.checked = true;
+window.acceptOffer = function () {
+    const checkbox = document.getElementById("offerCheckbox");
+    const error = document.getElementById("offerError");
+    const block = document.getElementById("offerBlock");
 
-//     // ✅ скрыть ошибку (bootstrap)
-//     if (error) error.classList.add("d-none");
+    if (checkbox) checkbox.checked = true;
 
-//     // ✅ убрать рамку ошибки (если добавляли)
-//     if (block) block.classList.remove("border", "border-danger", "p-2");
+    // ✅ скрыть ошибку (bootstrap)
+    if (error) error.classList.add("d-none");
 
-//     window.closeOfferModal();
-// };
+    // ✅ убрать подсветку ошибки если добавляли
+    if (block) block.classList.remove("border", "border-danger", "p-2", "rounded");
 
-// // ✅ Проверка чекбокса при отправке формы
-// document.addEventListener("DOMContentLoaded", () => {
-//     const form = document.getElementById("registerForm");
-//     if (!form) return;
+    window.closeOfferModal();
+};
 
-//     const checkbox = document.getElementById("offerCheckbox");
-//     const error = document.getElementById("offerError");
-//     const block = document.getElementById("offerBlock");
+/**
+ * ✅ VALIDATION ON SUBMIT
+ */
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("registerForm");
+    if (!form) return;
 
-//     if (!checkbox || !error || !block) return;
+    const checkbox = document.getElementById("offerCheckbox");
+    const error = document.getElementById("offerError");
+    const block = document.getElementById("offerBlock");
 
-//     form.addEventListener("submit", (e) => {
-//         if (!checkbox.checked) {
-//             e.preventDefault();
+    if (!checkbox || !error || !block) return;
 
-//             // ✅ показать ошибку
-//             error.classList.remove("d-none");
+    form.addEventListener("submit", (e) => {
+        if (!checkbox.checked) {
+            e.preventDefault();
 
-//             // ✅ рамка вокруг блока
-//             block.classList.add("border", "border-danger", "p-2", "rounded");
+            // ✅ показать ошибку
+            error.classList.remove("d-none");
 
-//             checkbox.focus();
-//         }
-//     });
-// });
+            // ✅ подсветить блок (bootstrap)
+            block.classList.add("border", "border-danger", "p-2", "rounded");
+
+            checkbox.focus();
+        }
+    });
+});

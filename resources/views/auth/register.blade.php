@@ -53,12 +53,14 @@
                         </div>
                         {{-- Публичная оферта --}}
                         <div id="offerBlock" class="form-check mt-4">
+
                             <input class="form-check-input" type="checkbox" id="offerCheckbox" name="accepted_offer"
                                 value="1">
 
                             <label class="form-check-label" for="offerCheckbox">
                                 Я принимаю условия
-                                <button type="button" onclick="openOfferModal()" class="underline text-emerald-400">
+                                <button type="button" onclick="openOfferModal()"
+                                    class="btn btn-link p-0 m-0 align-baseline text-success text-decoration-underline">
                                     публичной оферты
                                 </button>
                             </label>
@@ -67,6 +69,7 @@
                                 Для регистрации необходимо принять публичную оферту
                             </div>
                         </div>
+
                         <button class="btn btn-success mt-3" type="submit">
                             Отправить <i style="margin-left:5px;" class="fa fa-sign-in"></i>
                         </button>
@@ -81,40 +84,43 @@
         </div>
     </section>
     {{-- OFFER MODAL --}}
-    <div id="offerModal" class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50">
+    <div id="offerModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+
         <div class="bg-white w-full max-w-3xl max-h-[80vh] rounded-xl border border-slate-200 flex flex-col shadow-xl">
+
             {{-- Header --}}
             <div class="flex justify-between items-center px-6 py-4 border-b border-slate-200">
-                <h2 class="text-lg font-semibold text-slate-900">
-                    Публичная оферта
-                </h2>
-                <button onclick="closeOfferModal()" class="text-slate-400 hover:text-slate-700">
+                <h2 class="text-lg font-semibold text-slate-900">Публичная оферта</h2>
+
+                <button type="button" onclick="closeOfferModal()" class="text-slate-500 hover:text-slate-900 text-xl">
                     ✕
                 </button>
             </div>
+
             {{-- Content --}}
-            <div class="p-6 overflow-y-auto">
-                <div class="prose prose-sm max-w-none text-slate-800">
-                    @include('offer-content')
-                </div>
+            <div class="p-6 overflow-y-auto text-sm text-slate-800 leading-relaxed">
+                @include('offer-content')
             </div>
+
             {{-- Footer --}}
             <div class="px-6 py-4 border-t border-slate-200 flex justify-end gap-3">
-                <button onclick="closeOfferModal()"
-                    class="px-4 py-2 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100">
+                <button type="button" onclick="closeOfferModal()"
+                    class="px-4 py-2 rounded-lg border border-slate-300 text-slate-800 hover:bg-slate-100">
                     Отмена
                 </button>
-                <button onclick="acceptOffer()"
+
+                <button type="button" onclick="acceptOffer()"
                     class="px-4 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-500">
                     Я принимаю
                 </button>
             </div>
+
         </div>
     </div>
-    {{-- SCRIPT --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
 
+    {{-- SCRIPT --}}
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', () => {
             /* -------------------------------
              * FORM VALIDATION (PUBLIC OFFER)
              * ------------------------------- */
@@ -122,7 +128,6 @@
             const checkbox = document.getElementById('offerCheckbox');
             const error = document.getElementById('offerError');
             const block = document.getElementById('offerBlock');
-
             if (form) {
                 form.addEventListener('submit', function(e) {
                     if (!checkbox || !checkbox.checked) {
@@ -145,19 +150,16 @@
                     }
                 });
             }
-
             /* -------------------------------
              * OFFER MODAL CONTROLS
              * ------------------------------- */
             const modal = document.getElementById('offerModal');
-
             window.openOfferModal = function() {
                 if (!modal) return;
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
                 document.body.classList.add('overflow-hidden');
             };
-
             window.closeOfferModal = function() {
                 if (!modal) return;
                 modal.classList.add('hidden');
@@ -187,6 +189,6 @@
             };
 
         });
-    </script>
+    </script> --}}
 
 @endsection
