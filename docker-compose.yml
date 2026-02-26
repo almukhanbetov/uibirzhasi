@@ -1,43 +1,45 @@
 services:
   app:
-    image: almuko/uibirzhasi-app:latest
-    container_name: uibirzhasi_app
+    image: almuko/telegram-app:latest
+    container_name: telegram_app
     working_dir: /var/www
     restart: always
     env_file:
       - .env
     volumes:
-      - appdata:/var/www
+      - storage_data:/var/www/storage
+      - uploads_data:/var/www/public/uploads
+      - public_data:/var/www/public
     depends_on:
       - db
 
   web:
     image: nginx:alpine
-    container_name: uibirzhasi_web
+    container_name: telegram_web
     restart: always
     ports:
       - "8081:80"
     volumes:
-      - appdata:/var/www
+      - storage_data:/var/www/storage
+      - uploads_data:/var/www/public/uploads
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - public_data:/var/www/public
     depends_on:
       - app
 
   db:
-    image: mysql:8.0
-    container_name: uibirzhasi_db
+    image: postgres:17
+    container_name: telegram_db
     restart: always
     environment:
-      MYSQL_DATABASE: uibirzhasi
-      MYSQL_USER: root
-      MYSQL_PASSWORD: Zxcvbnm123
-      MYSQL_ROOT_PASSWORD: Zxcvbnm123
-    command: --default-authentication-plugin=mysql_native_password
-    ports:
-      - "3306:3306"
+      POSTGRES_DB: telegram
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Zxcvbnm123
     volumes:
-      - uibirzhasi_mysql_data:/var/lib/mysql
+      - telegram_pgdata:/var/lib/postgresql/data
 
 volumes:
-  uibirzhasi_mysql_data:
-  appdata:
+  storage_data:
+  telegram_pgdata:
+  uploads_data:
+  public_data:

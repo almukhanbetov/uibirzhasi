@@ -23,11 +23,7 @@
     <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/drift-zoom/drift-basic.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
-
-
-
 </head>
-
 <body class="index-page">
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div
