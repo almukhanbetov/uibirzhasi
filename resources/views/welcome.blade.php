@@ -236,7 +236,7 @@
             <div class="row g-4 justify-content-center">
 
                 {{-- Банковские карты --}}
-                <div class="col-md-4">
+                <div class="col-lg-3 col-md-6">
                     <div class="card border-0 rounded-4 shadow-sm h-100 text-center p-4">
                         <div class="mb-3 d-flex justify-content-center gap-3">
                             {{-- VISA --}}
@@ -260,20 +260,32 @@
                 </div>
 
                 {{-- Процедура доплаты --}}
-                <div class="col-md-4">
+                <div class="col-lg-3 col-md-6">
                     <div class="card border-0 rounded-4 shadow-sm h-100 p-4">
                         <div class="mb-3 text-success" style="font-size: 28px;">
                             <i class="bi bi-arrow-repeat"></i>
                         </div>
-                        <h5 class="fw-bold text-dark mb-2">Процедура доплаты</h5>
+                        <h5 class="fw-bold text-dark mb-2">Тарифы</h5>
                         <p class="text-muted small mb-0">
-                            При изменении условий сделки доплата рассчитывается автоматически на основе актуальной рыночной цены и производится через личный кабинет.
+                           Комиссия составляет 1% от стоимости недвижимости — оплачивается отдельно Продавцом и Покупателем после совпадения цен и подтверждения сделки.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card border-0 rounded-4 shadow-sm h-100 p-4">
+                        <div class="mb-3 text-success" style="font-size: 28px;">
+                            <i class="bi bi-arrow-repeat"></i>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-2">Процедура оплаты</h5>
+                        <p class="text-muted small mb-0">
+                            При изменении условий сделки оплата рассчитывается автоматически на основе актуальной рыночной цены и производится через личный кабинет.
                         </p>
                     </div>
                 </div>
 
                 {{-- Правила возврата --}}
-                <div class="col-md-4">
+                <div class="col-lg-3 col-md-6">
                     <div class="card border-0 rounded-4 shadow-sm h-100 p-4">
                         <div class="mb-3 text-success" style="font-size: 28px;">
                             <i class="bi bi-arrow-counterclockwise"></i>
