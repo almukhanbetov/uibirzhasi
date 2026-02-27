@@ -1,23 +1,24 @@
 @extends('layouts.guest')
 @section('content')
 
-    {{-- ☁️ Сведения о работе Биржи Недвижимости --}}
-    <section style="background: #f8faf9; padding-top: 140px; padding-bottom: 50px;">
-        <div class="container" data-aos="fade-up">
-            <h5 class="fw-bold text-dark mb-1 text-center" style="font-size: 20px; padding-bottom:20px;">Сведения о работе Биржи Недвижимости</h5>
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
-                        style="background: #fff; border-radius: 50px; border: 1px solid #d4edda;">
-                        <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
-                            style="width:44px; height:44px; min-width:44px; background: #e8f5ee;">
-                            <i class="bi bi-info-circle-fill text-success fs-5"></i>
-                        </div>
-                        <p class="mb-0 text-secondary" style="font-size: 13.5px; line-height: 1.5;">
-                            Тарифы: <strong class="text-dark">1%</strong> от стоимости недвижимости для <strong class="text-dark">Продавца</strong> и <strong class="text-dark">Покупателя</strong> недвижимости. 
-                        </p>
-                    </div>
-                </div>
+    
+    
+
+    <section id="hero" class="hero section" >
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            {{-- ⭐ Заголовок --}}
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-delay="150">
+                <p class="text-uppercase fw-semibold text-success mb-2" style="letter-spacing: 1.5px;">
+                    Впервые в мире биржа недвижимости
+                </p>
+                <h1 class="fw-bold display-5 text-dark mb-3" style="font-family: 'Poppins', sans-serif;">
+                    UIBIRZHASI.KZ
+                </h1>
+                <p class="lead text-muted" style="max-width: 600px; margin: 0 auto;">
+                    <span class="text-success fw-semibold">Мы гарантируем, что продадим </span>.
+                </p>
+
+             <div class="row g-3 mt-3">
                 {{-- Карточка 1 --}}
                 <div class="col-md-6">
                     <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
@@ -71,42 +72,6 @@
                     </div>
                 </div>
             </div>
-
-            {{-- ⚠️ Важное уведомление --}}
-            <div class="row mt-3">
-                <div class="col-12">
-                    <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
-                        style="background: #fff8e1; border-radius: 50px; border: 1px solid #ffe082;">
-                        <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
-                            style="width:44px; height:44px; min-width:44px; background: #fff3cd;">
-                            <i class="bi bi-exclamation-triangle-fill text-warning fs-5"></i>
-                        </div>
-                        <div>
-                            <p class="mb-0 fw-bold text-dark" style="font-size: 13.5px;">Важное уведомление</p>
-                            <p class="mb-0 text-secondary" style="font-size: 13px; line-height: 1.5;">
-                                После получения уведомления на ватсап Пользователь заходит в личный кабинет, вносит <strong class="text-dark">депозит 1%</strong> от цены недвижимости и видит <strong class="text-dark">контакты контрагента</strong>.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="hero" class="hero section" style="padding-top: 0; margin-top: -45px;">
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-            {{-- ⭐ Заголовок --}}
-            <div class="text-center mb-5" data-aos="fade-up" data-aos-delay="150">
-                <p class="text-uppercase fw-semibold text-success mb-2" style="letter-spacing: 1.5px;">
-                    Впервые в мире биржа недвижимости
-                </p>
-                <h1 class="fw-bold display-5 text-dark mb-3" style="font-family: 'Poppins', sans-serif;">
-                    UIBIRZHASI.KZ
-                </h1>
-                <p class="lead text-muted" style="max-width: 600px; margin: 0 auto;">
-                    <span class="text-success fw-semibold">Мы гарантируем, что продадим </span>.
-                </p>
             </div>
             <div class="row align-items-center g-5">
                 {{-- 📝 Форма --}}
@@ -322,35 +287,8 @@
 
             </div>
 
-            {{-- Тарифы --}}
-            <div class="row g-4 justify-content-center mt-2">
-                <div class="col-md-4">
-                    <div class="card border-success border-2 rounded-4 h-100 p-4 text-center">
-                        <p class="text-uppercase fw-bold text-success mb-1" style="font-size: 11px; letter-spacing: 2px;">Стандарт</p>
-                        <div class="fw-bold text-dark mb-1" style="font-size: 36px; font-family: 'Poppins', sans-serif;">1%</div>
-                        <p class="text-muted small mb-3">от суммы сделки</p>
-                        <ul class="list-unstyled text-start text-muted small mb-0">
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Размещение объявления</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Проверка цены системой</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Уведомление в WhatsApp</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Личный кабинет</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card border-0 rounded-4 h-100 p-4 text-center text-white" style="background: #1A6B3C;">
-                        <p class="text-uppercase fw-bold mb-1" style="font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,0.7);">Премиум</p>
-                        <div class="fw-bold mb-1" style="font-size: 36px; font-family: 'Poppins', sans-serif;">1.5%</div>
-                        <p class="small mb-3" style="color: rgba(255,255,255,0.7);">от суммы сделки</p>
-                        <ul class="list-unstyled text-start small mb-0" style="color: rgba(255,255,255,0.85);">
-                            <li class="mb-2"><i class="bi bi-check-circle-fill me-2" style="color: #C9A84C;"></i>Всё из Стандарта</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill me-2" style="color: #C9A84C;"></i>Приоритетный показ</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill me-2" style="color: #C9A84C;"></i>Персональный менеджер</li>
-                            <li><i class="bi bi-check-circle-fill me-2" style="color: #C9A84C;"></i>Расширенная аналитика</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            
+            
 
         </div>
     </section>
