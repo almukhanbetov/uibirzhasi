@@ -15,7 +15,7 @@
                     UIBIRZHASI.KZ
                 </h1>
                 <p class="lead text-muted" style="max-width: 600px; margin: 0 auto;">
-                    <span class="text-success fw-semibold">Мы гарантируем, что продадим </span>.
+                    <span class="text-success fw-semibold">Мы гарантируем, что продадим вашу недвижимость. </span>
                 </p>
 
              <div class="row g-3 mt-3">
@@ -224,12 +224,12 @@
     <section class="payment-section py-5" style="background: #f8faf9; border-top: 1px solid #dee2e6;">
         <div class="container" data-aos="fade-up">
             <div class="text-center mb-5">
-                <p class="text-uppercase fw-semibold text-success mb-2" style="letter-spacing: 1.5px; font-size: 13px;">
+                <!-- <p class="text-uppercase fw-semibold text-success mb-2" style="letter-spacing: 1.5px; font-size: 13px;">
                     Оплата
                 </p>
                 <h2 class="fw-bold text-dark mb-2" style="font-family: 'Poppins', sans-serif;">
                     Способы оплаты
-                </h2>
+                </h2> -->
                 <!-- <p class="text-muted">Прозрачные тарифы без скрытых платежей</p> -->
             </div>
 
