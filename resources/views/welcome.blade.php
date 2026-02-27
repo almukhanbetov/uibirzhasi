@@ -1,6 +1,99 @@
 @extends('layouts.guest')
 @section('content')
-    <section id="hero" class="hero section">
+
+    {{-- ☁️ Сведения о работе Биржи Недвижимости --}}
+    <section style="background: #f8faf9; padding-top: 140px; padding-bottom: 50px;">
+        <div class="container" data-aos="fade-up">
+            <div class="d-flex align-items-center gap-3 mb-2">
+             <div class="rounded-circle d-flex align-items-center justify-content-center"
+                   style="width:42px; height:42px; min-width:42px; background: #1A6B3C;">
+                 <span class="text-white fw-bold" style="font-size: 16px;">1</span>
+             </div>
+             <h5 class="fw-bold text-dark mb-0" style="font-size: 20px;">Сведения о работе Биржи Недвижимости</h5>
+            </div>
+            <p class="text-muted mb-4" style="font-size: 13.5px; padding-left: 54px;">
+             Тарифы: <strong class="text-success">1%</strong> от стоимости недвижимости для
+             <strong class="text-dark">Продавца</strong> и <strong class="text-dark">Покупателя</strong> недвижимости.    
+            <p>
+
+            <div class="row g-3">
+                {{-- Карточка 1 --}}
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
+                        style="background: #fff; border-radius: 50px; border: 1px solid #d4edda;">
+                        <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
+                            style="width:44px; height:44px; min-width:44px; background: #e8f5ee;">
+                            <i class="bi bi-info-circle-fill text-success fs-5"></i>
+                        </div>
+                        <p class="mb-0 text-secondary" style="font-size: 13.5px; line-height: 1.5;">
+                            Ежедневно в 00.00 Астаны у <strong class="text-dark">продавцов</strong> недвижимости цена <strong class="text-danger">падает на 1%</strong>.
+                        </p>
+                    </div>
+                </div>
+                {{-- Карточка 2 --}}
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
+                        style="background: #fff; border-radius: 50px; border: 1px solid #d4edda;">
+                        <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
+                            style="width:44px; height:44px; min-width:44px; background: #e8f5ee;">
+                            <i class="bi bi-info-circle-fill text-success fs-5"></i>
+                        </div>
+                        <p class="mb-0 text-secondary" style="font-size: 13.5px; line-height: 1.5;">
+                            Ежедневно в 00.00 Астаны у <strong class="text-dark">покупателей</strong> недвижимости цена <strong class="text-success">поднимается на 1%</strong>.
+                        </p>
+                    </div>
+                </div>
+                {{-- Карточка 3 --}}
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
+                        style="background: #fff; border-radius: 50px; border: 1px solid #d4edda;">
+                        <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
+                            style="width:44px; height:44px; min-width:44px; background: #e8f5ee;">
+                            <i class="bi bi-info-circle-fill text-success fs-5"></i>
+                        </div>
+                        <p class="mb-0 text-secondary" style="font-size: 13.5px; line-height: 1.5;">
+                            При совпадении цен с точностью до <strong class="text-dark">2%</strong> и основных характеристик — продавцу и покупателю высылаются <strong class="text-dark">уведомления в WhatsApp</strong>.
+                        </p>
+                    </div>
+                </div>
+                {{-- Карточка 4 --}}
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
+                        style="background: #fff; border-radius: 50px; border: 1px solid #d4edda;">
+                        <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
+                            style="width:44px; height:44px; min-width:44px; background: #e8f5ee;">
+                            <i class="bi bi-info-circle-fill text-success fs-5"></i>
+                        </div>
+                        <p class="mb-0 text-secondary" style="font-size: 13.5px; line-height: 1.5;">
+                            После уведомления пользователь вносит <strong class="text-dark">депозит 1%</strong> от цены в личном кабинете и получает <strong class="text-dark">контакты контрагента</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {{-- ⚠️ Важное уведомление --}}
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
+                        style="background: #fff8e1; border-radius: 50px; border: 1px solid #ffe082;">
+                        <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
+                            style="width:44px; height:44px; min-width:44px; background: #fff3cd;">
+                            <i class="bi bi-exclamation-triangle-fill text-warning fs-5"></i>
+                        </div>
+                        <div>
+                            <p class="mb-0 fw-bold text-dark" style="font-size: 13.5px;">Важное уведомление</p>
+                            <p class="mb-0 text-secondary" style="font-size: 13px; line-height: 1.5;">
+                                После получения уведомления на ватсап Пользователь заходит в личный кабинет, вносит <strong class="text-dark">депозит 1%</strong> от цены недвижимости и видит <strong class="text-dark">контакты контрагента</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="hero" class="hero section" style="padding-top: 10px;">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             {{-- ⭐ Заголовок --}}
             <div class="text-center mb-5" data-aos="fade-up" data-aos-delay="150">
@@ -145,6 +238,7 @@
             </div>
         </div>
     </section>
+
     <section id="properties" class="properties section">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row">
@@ -157,176 +251,8 @@
         </div>
     </section>
     <!-- Terms Of Service Section -->
-    <section id="terms-of-service" class="terms-of-service section">
-
-        <div class="container" data-aos="fade-up">
-            <!-- Page Header -->
-            <div class="tos-header text-center" data-aos="fade-up">
-                {{-- <span class="last-updated">Last Updated: February 27, 2025</span> --}}
-                {{-- <h2>Сведения о работе Биржи Недвижимости</h2> --}}
-                {{-- <p>Please read these terms of service carefully before using our services</p> --}}
-            </div>
-
-            <!-- Content -->
-            <div class="tos-content" data-aos="fade-up" data-aos-delay="200">
-                <!-- Agreement Section -->
-                <div id="agreement" class="content-section">
-                    <h3>1. Сведения о работе Биржи Недвижимости</h3>
-
-                    <p>Тарифы: 1% от стоимости недвижимости для Продавца и Покупателя недвижимости.</p>
-                    <div class="info-box">
-                        <i class="bi bi-info-circle"></i>
-                        <p>Ежедневно в 00.00 Астаны у продавцов недижимости цена падает на 1%.</p>
-                        <i class="bi bi-info-circle"></i>
-                        <p>Ежедневно в 00.00 Астаны у покупателей недижимости цена поднимается на 1%.</p>
-                    </div>
-                    <div class="info-box">
-
-                        <i class="bi bi-info-circle"></i>
-                        <p>При совпадении цен с точностью до 2% и основных характеристик недвижимости продавцу и покупателю
-                            на ватсап высылаются уведомления.</p>
-                        <i class="bi bi-info-circle"></i>
-                        <p>После получения уведомления на ватсап Пользователь заходит в личный кабинет, вносит депозит в
-                            размере 1% от цены недвижимости и видит контакты контрагента. </p>
-                    </div>
-                    <div class="alert-box">
-                        <i class="bi bi-exclamation-triangle"></i>
-                        <div class="alert-content">
-                            <h5>Важное уведомление</h5>
-                            <p>После получения уведомления на ватсап Пользователь заходит в личный кабинет, вносит депозит в
-                                размере 1% от цены недвижимости и видит контакты контрагента.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Intellectual Property -->
-                {{-- <div id="intellectual-property" class="content-section">
-                    <h3>2. Intellectual Property Rights</h3>
-                    <p>Our service and its original content, features, and functionality are owned by us and are protected
-                        by international copyright, trademark, patent, trade secret, and other intellectual property laws.
-                    </p>
-                    <ul class="list-items">
-                        <li>All content is our exclusive property</li>
-                        <li>You may not copy or modify the content</li>
-                        <li>Our trademarks may not be used without permission</li>
-                        <li>Content is for personal, non-commercial use only</li>
-                    </ul>
-                </div> --}}
-
-                <!-- User Accounts -->
-                {{-- <div id="user-accounts" class="content-section">
-                    <h3>3. User Accounts</h3>
-                    <p>When you create an account with us, you must provide accurate, complete, and current information.
-                        Failure to do so constitutes a breach of the Terms, which may result in immediate termination of
-                        your account.</p>
-                    <div class="alert-box">
-                        <i class="bi bi-exclamation-triangle"></i>
-                        <div class="alert-content">
-                            <h5>Important Notice</h5>
-                            <p>You are responsible for safeguarding the password and for all activities that occur under
-                                your account.</p>
-                        </div>
-                    </div>
-                </div> --}}
-
-                <!-- Prohibited Activities -->
-                {{-- <div id="prohibited" class="content-section">
-                    <h3>4. Prohibited Activities</h3>
-                    <p>You may not access or use the Service for any purpose other than that for which we make it available.
-                    </p>
-                    <div class="prohibited-list">
-                        <div class="prohibited-item">
-                            <i class="bi bi-x-circle"></i>
-                            <span>Systematic retrieval of data or content</span>
-                        </div>
-                        <div class="prohibited-item">
-                            <i class="bi bi-x-circle"></i>
-                            <span>Publishing malicious content</span>
-                        </div>
-                        <div class="prohibited-item">
-                            <i class="bi bi-x-circle"></i>
-                            <span>Engaging in unauthorized framing</span>
-                        </div>
-                        <div class="prohibited-item">
-                            <i class="bi bi-x-circle"></i>
-                            <span>Attempting to gain unauthorized access</span>
-                        </div>
-                    </div>
-                </div> --}}
-
-                <!-- Disclaimers -->
-                {{-- <div id="disclaimer" class="content-section">
-                    <h3>5. Disclaimers</h3>
-                    <p>Your use of our service is at your sole risk. The service is provided "AS IS" and "AS AVAILABLE"
-                        without warranties of any kind, whether express or implied.</p>
-                    <div class="disclaimer-box">
-                        <p>We do not guarantee that:</p>
-                        <ul>
-                            <li>The service will meet your requirements</li>
-                            <li>The service will be uninterrupted or error-free</li>
-                            <li>Results from using the service will be accurate</li>
-                            <li>Any errors will be corrected</li>
-                        </ul>
-                    </div>
-                </div> --}}
-
-                <!-- Limitation of Liability -->
-                {{-- <div id="limitation" class="content-section">
-                    <h3>6. Limitation of Liability</h3>
-                    <p>In no event shall we be liable for any indirect, punitive, incidental, special, consequential, or
-                        exemplary damages arising out of or in connection with your use of the service.</p>
-                </div>
-
-                <!-- Indemnification -->
-                <div id="indemnification" class="content-section">
-                    <h3>7. Indemnification</h3>
-                    <p>You agree to defend, indemnify, and hold us harmless from and against any claims, liabilities,
-                        damages, losses, and expenses arising out of your use of the service.</p>
-                </div>
-
-                <!-- Termination -->
-                <div id="termination" class="content-section">
-                    <h3>8. Termination</h3>
-                    <p>We may terminate or suspend your account immediately, without prior notice or liability, for any
-                        reason whatsoever, including without limitation if you breach the Terms.</p>
-                </div> --}}
-
-                <!-- Governing Law -->
-                {{-- <div id="governing-law" class="content-section">
-                    <h3>9. Governing Law</h3>
-                    <p>These Terms shall be governed by and construed in accordance with the laws of [Your Country], without
-                        regard to its conflict of law provisions.</p>
-                </div>
-
-                <!-- Changes -->
-                <div id="changes" class="content-section">
-                    <h3>10. Changes to Terms</h3>
-                    <p>We reserve the right to modify or replace these Terms at any time. We will provide notice of any
-                        changes by posting the new Terms on this page.</p>
-                    <div class="notice-box">
-                        <i class="bi bi-bell"></i>
-                        <p>By continuing to access or use our service after those revisions become effective, you agree to
-                            be bound by the revised terms.</p>
-                    </div>
-                </div>
-            </div> --}}
-
-                <!-- Contact Section -->
-                {{-- <div class="tos-contact" data-aos="fade-up" data-aos-delay="300">
-                    <div class="contact-box">
-                        <div class="contact-icon">
-                            <i class="bi bi-envelope"></i>
-                        </div>
-                        <div class="contact-content">
-                            <h4>Questions About Terms?</h4>
-                            <p>If you have any questions about these Terms, please contact us.</p>
-                            <a href="#" class="contact-link">Contact Support</a>
-                        </div>
-                    </div>
-                </div> --}}
-            </div>
-
-    </section><!-- /Terms Of Service Section -->
+    
+    <!-- /Terms Of Service Section -->
 
     {{-- 💳 Способы оплаты --}}
     <section class="payment-section py-5" style="background: #f8faf9; border-top: 1px solid #dee2e6;">
