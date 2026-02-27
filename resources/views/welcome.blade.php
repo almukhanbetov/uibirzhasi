@@ -4,7 +4,7 @@
     
     
 
-    <section id="hero" class="hero section" >
+    <section id="hero" class="hero section mt-5" >
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             {{-- ⭐ Заголовок --}}
             <div class="text-center mb-5" data-aos="fade-up" data-aos-delay="150">
@@ -230,7 +230,7 @@
                 <h2 class="fw-bold text-dark mb-2" style="font-family: 'Poppins', sans-serif;">
                     Способы оплаты
                 </h2>
-                <p class="text-muted">Прозрачные тарифы без скрытых платежей</p>
+                <!-- <p class="text-muted">Прозрачные тарифы без скрытых платежей</p> -->
             </div>
 
             <div class="row g-4 justify-content-center">
