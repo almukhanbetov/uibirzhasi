@@ -4,19 +4,20 @@
     {{-- ☁️ Сведения о работе Биржи Недвижимости --}}
     <section style="background: #f8faf9; padding-top: 140px; padding-bottom: 50px;">
         <div class="container" data-aos="fade-up">
-            <div class="d-flex align-items-center gap-3 mb-2">
-             <div class="rounded-circle d-flex align-items-center justify-content-center"
-                   style="width:42px; height:42px; min-width:42px; background: #1A6B3C;">
-                 <span class="text-white fw-bold" style="font-size: 16px;">1</span>
-             </div>
-             <h5 class="fw-bold text-dark mb-0" style="font-size: 20px;">Сведения о работе Биржи Недвижимости</h5>
-            </div>
-            <p class="text-muted mb-4" style="font-size: 13.5px; padding-left: 54px;">
-             Тарифы: <strong class="text-success">1%</strong> от стоимости недвижимости для
-             <strong class="text-dark">Продавца</strong> и <strong class="text-dark">Покупателя</strong> недвижимости.    
-            <p>
-
+            <h5 class="fw-bold text-dark mb-1 text-center" style="font-size: 20px; padding-bottom:20px;">Сведения о работе Биржи Недвижимости</h5>
             <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
+                        style="background: #fff; border-radius: 50px; border: 1px solid #d4edda;">
+                        <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
+                            style="width:44px; height:44px; min-width:44px; background: #e8f5ee;">
+                            <i class="bi bi-info-circle-fill text-success fs-5"></i>
+                        </div>
+                        <p class="mb-0 text-secondary" style="font-size: 13.5px; line-height: 1.5;">
+                            Тарифы: <strong class="text-dark">1%</strong> от стоимости недвижимости для <strong class="text-dark">Продавца</strong> и <strong class="text-dark">Покупателя</strong> недвижимости. 
+                        </p>
+                    </div>
+                </div>
                 {{-- Карточка 1 --}}
                 <div class="col-md-6">
                     <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
@@ -93,7 +94,7 @@
         </div>
     </section>
 
-    <section id="hero" class="hero section" style="padding-top: 10px;">
+    <section id="hero" class="hero section" style="padding-top: 0; margin-top: -45px;">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             {{-- ⭐ Заголовок --}}
             <div class="text-center mb-5" data-aos="fade-up" data-aos-delay="150">
