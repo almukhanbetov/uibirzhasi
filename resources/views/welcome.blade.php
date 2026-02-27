@@ -11,7 +11,7 @@
                     UIBIRZHASI.KZ
                 </h1>
                 <p class="lead text-muted" style="max-width: 600px; margin: 0 auto;">
-                    <span class="text-success fw-semibold">Мы гарантируем, что продадим </span>.
+                    <span class="text-success fw-semibold">Мы гарантируем, что продадим вашу недвижимость</span>.
                 </p>
             </div>
             <div class="row align-items-center g-5">
@@ -327,107 +327,6 @@
             </div>
 
     </section><!-- /Terms Of Service Section -->
-
-    {{-- 💳 Способы оплаты --}}
-    <section class="payment-section py-5" style="background: #f8faf9; border-top: 1px solid #dee2e6;">
-        <div class="container" data-aos="fade-up">
-            <div class="text-center mb-5">
-                <p class="text-uppercase fw-semibold text-success mb-2" style="letter-spacing: 1.5px; font-size: 13px;">
-                    Оплата
-                </p>
-                <h2 class="fw-bold text-dark mb-2" style="font-family: 'Poppins', sans-serif;">
-                    Способы оплаты
-                </h2>
-                <p class="text-muted">Прозрачные тарифы без скрытых платежей</p>
-            </div>
-
-            <div class="row g-4 justify-content-center">
-
-                {{-- Банковские карты --}}
-                <div class="col-md-4">
-                    <div class="card border-0 rounded-4 shadow-sm h-100 text-center p-4">
-                        <div class="mb-3 d-flex justify-content-center gap-3">
-                            {{-- VISA --}}
-                            <div class="border rounded-3 px-3 py-2 d-flex align-items-center justify-content-center" style="width:90px; height:54px; background:#fff;">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 16" width="60" height="20">
-                                    <text x="0" y="14" font-family="Arial, sans-serif" font-size="16" font-weight="900" font-style="italic" fill="#1A1F71">VISA</text>
-                                </svg>
-                            </div>
-                            {{-- Mastercard --}}
-                            <div class="border rounded-3 px-3 py-2 d-flex align-items-center justify-content-center gap-1" style="width:90px; height:54px; background:#fff;">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" width="54" height="34">
-                                    <circle cx="16" cy="15" r="13" fill="#EB001B"/>
-                                    <circle cx="32" cy="15" r="13" fill="#F79E1B"/>
-                                    <path d="M24 4.8a13 13 0 0 1 0 20.4A13 13 0 0 1 24 4.8z" fill="#FF5F00"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <h5 class="fw-bold text-dark mb-2">Банковская карта</h5>
-                        <p class="text-muted small mb-0">Безналичная оплата через защищённый платёжный шлюз</p>
-                    </div>
-                </div>
-
-                {{-- Процедура доплаты --}}
-                <div class="col-md-4">
-                    <div class="card border-0 rounded-4 shadow-sm h-100 p-4">
-                        <div class="mb-3 text-success" style="font-size: 28px;">
-                            <i class="bi bi-arrow-repeat"></i>
-                        </div>
-                        <h5 class="fw-bold text-dark mb-2">Процедура доплаты</h5>
-                        <p class="text-muted small mb-0">
-                            При изменении условий сделки доплата рассчитывается автоматически на основе актуальной рыночной цены и производится через личный кабинет.
-                        </p>
-                    </div>
-                </div>
-
-                {{-- Правила возврата --}}
-                <div class="col-md-4">
-                    <div class="card border-0 rounded-4 shadow-sm h-100 p-4">
-                        <div class="mb-3 text-success" style="font-size: 28px;">
-                            <i class="bi bi-arrow-counterclockwise"></i>
-                        </div>
-                        <h5 class="fw-bold text-dark mb-2">Правила возврата</h5>
-                        <p class="text-muted small mb-0">
-                            Возврат средств возможен в течение 3 рабочих дней с момента оплаты, если сделка не была завершена. Обратитесь в поддержку через личный кабинет.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-            {{-- Тарифы --}}
-            <div class="row g-4 justify-content-center mt-2">
-                <div class="col-md-4">
-                    <div class="card border-success border-2 rounded-4 h-100 p-4 text-center">
-                        <p class="text-uppercase fw-bold text-success mb-1" style="font-size: 11px; letter-spacing: 2px;">Стандарт</p>
-                        <div class="fw-bold text-dark mb-1" style="font-size: 36px; font-family: 'Poppins', sans-serif;">1%</div>
-                        <p class="text-muted small mb-3">от суммы сделки</p>
-                        <ul class="list-unstyled text-start text-muted small mb-0">
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Размещение объявления</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Проверка цены системой</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Уведомление в WhatsApp</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Личный кабинет</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card border-0 rounded-4 h-100 p-4 text-center text-white" style="background: #1A6B3C;">
-                        <p class="text-uppercase fw-bold mb-1" style="font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,0.7);">Премиум</p>
-                        <div class="fw-bold mb-1" style="font-size: 36px; font-family: 'Poppins', sans-serif;">1.5%</div>
-                        <p class="small mb-3" style="color: rgba(255,255,255,0.7);">от суммы сделки</p>
-                        <ul class="list-unstyled text-start small mb-0" style="color: rgba(255,255,255,0.85);">
-                            <li class="mb-2"><i class="bi bi-check-circle-fill me-2" style="color: #C9A84C;"></i>Всё из Стандарта</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill me-2" style="color: #C9A84C;"></i>Приоритетный показ</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill me-2" style="color: #C9A84C;"></i>Персональный менеджер</li>
-                            <li><i class="bi bi-check-circle-fill me-2" style="color: #C9A84C;"></i>Расширенная аналитика</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
 @endsection
 <script>
     document.addEventListener('DOMContentLoaded', function() {
