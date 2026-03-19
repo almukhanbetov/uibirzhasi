@@ -37,7 +37,6 @@ services:
       POSTGRES_PASSWORD: Zxcvbnm123
     volumes:
       - telegram_pgdata:/var/lib/postgresql/data
-
 volumes:
   storage_data:
   telegram_pgdata:

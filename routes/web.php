@@ -18,15 +18,29 @@ use App\Http\Controllers\DepositController;
 use App\Http\Controllers\MatchController;
 use App\Http\Controllers\OfferController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\PageBlockController;
+use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PaymentSectionController;
 
-// Route::middleware('auth')->prefix('draft')->name('draft.')->group(function () {
-//     Route::post('save', [DraftController::class, 'save'])->name('save');
-//     Route::post('upload-photo', [DraftController::class, 'uploadPhoto'])->name('upload-photo');
-//     Route::delete('delete-photo', [DraftController::class, 'deletePhoto'])->name('delete-photo');
-// });
 Route::get('/test-telegram', function () {
     app(\App\Services\TelegramService::class)
         ->send(Auth::user()->telegram_id, 'Локально работает 🚀');
+});
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::resource('deposits', AdminDepositController::class)->only(['index', 'show', 'update']);
+    Route::resource('matches', AdminMatchController::class)->only(['index', 'show', 'update']);
+    Route::resource('listings', AdminListingController::class);
+    Route::resource('payment-sections', PaymentSectionController::class);
+    Route::resource('users', AdminUserController::class)->only(['index', 'show', 'update']);
+
+    Route::resource('pages', PageController::class);
+    Route::get('pages/{page}/blocks', [PageBlockController::class, 'index'])->name('pages.blocks.index');
+    Route::get('pages/{page}/blocks/create', [PageBlockController::class, 'create'])->name('pages.blocks.create');
+    Route::post('pages/{page}/blocks', [PageBlockController::class, 'store'])->name('pages.blocks.store');
+    Route::get('blocks/{block}/edit', [PageBlockController::class, 'edit'])->name('blocks.edit');
+    Route::put('blocks/{block}', [PageBlockController::class, 'update'])->name('blocks.update');
+    Route::delete('blocks/{block}', [PageBlockController::class, 'destroy'])->name('blocks.destroy');
 });
 Route::post('/telegram/webhook', [TelegramWebhookController::class, 'handle']);
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
@@ -42,40 +56,30 @@ Route::get('/listings/show/{id}', [ListingController::class, 'show'])->name('lis
 Route::get('/listings/ajax', [ListingController::class, 'ajaxSearch'])->name('listings.ajax');
 Route::get('/profile/create', [ListingController::class, 'create'])->name('listing.create');
 Route::post('/profile/create', [ListingController::class, 'store'])->name('listing.store');
-
-Route::get('/offer', fn () => view('pages.offer'))->name('offer');
-
+Route::get('/offer', fn() => view('pages.offer'))->name('offer');
 Route::get('/regions', [LocationController::class, 'regions']);
 Route::get('/cities/{region}', [LocationController::class, 'cities']);
 Route::get('/districts/{city}', [LocationController::class, 'districts']);
+Route::get('/payment/{id}', [App\Http\Controllers\PaymentController::class,'show'])->name('payment.show');
 Route::middleware('auth')->group(function () {
     Route::post('/matches/{match}/deposit', [\App\Http\Controllers\MatchDepositController::class, 'store'])
         ->name('matches.deposit');
 });
 Route::middleware(['auth', 'offer.accepted'])->group(function () {
     // Личный кабинет
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // Недвижимость
     Route::resource('listings', ListingController::class);
     // Запросы покупателей
     // Route::resource('requests', BuyRequestController::class);
     // Депозиты / сделки
     Route::post('/matches/{id}/deposit', [DepositController::class, 'store']);
-
 });
 Route::get('/offer/accept', [OfferController::class, 'show'])
     ->middleware('auth')
     ->name('offer.accept');
 Route::post('/offer/accept', [OfferController::class, 'accept'])
     ->middleware('auth');
-
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
-    Route::resource('deposits', AdminDepositController::class)->only(['index', 'show', 'update']);
-    Route::resource('matches', AdminMatchController::class)->only(['index', 'show', 'update']);
-    Route::resource('listings', AdminListingController::class);
-    Route::resource('users', AdminUserController::class)->only(['index', 'show', 'update']);
-});
 Route::middleware('auth')->group(function () {
     Route::get('/profile/matches', [MatchController::class, 'index'])->name('profile.matches.index');
     Route::get('/matches/{match}', [MatchController::class, 'show'])->name('profile.matches.show');

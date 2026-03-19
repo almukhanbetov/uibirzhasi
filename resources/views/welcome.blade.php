@@ -1,10 +1,6 @@
 @extends('layouts.guest')
 @section('content')
-
-    
-    
-
-    <section id="hero" class="hero section mt-5" >
+    <section id="hero" class="hero section mt-5">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             {{-- ⭐ Заголовок --}}
             <div class="text-center mb-5" data-aos="fade-up" data-aos-delay="150">
@@ -17,61 +13,65 @@
                 <p class="lead text-muted" style="max-width: 600px; margin: 0 auto;">
                     <span class="text-success fw-semibold">Мы гарантируем, что продадим вашу недвижимость. </span>
                 </p>
-
-             <div class="row g-3 mt-3">
-                {{-- Карточка 1 --}}
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
-                        style="background: #fff; border-radius: 50px; border: 1px solid #d4edda;">
-                        <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
-                            style="width:44px; height:44px; min-width:44px; background: #e8f5ee;">
-                            <i class="bi bi-info-circle-fill text-success fs-5"></i>
+                <div class="row g-3 mt-3">
+                    {{-- Карточка 1 --}}
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
+                            style="background: #fff; border-radius: 50px; border: 1px solid #d4edda;">
+                            <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
+                                style="width:44px; height:44px; min-width:44px; background: #e8f5ee;">
+                                <i class="bi bi-info-circle-fill text-success fs-5"></i>
+                            </div>
+                            <p class="mb-0 text-secondary" style="font-size: 13.5px; line-height: 1.5;">
+                                Ежедневно в 00.00 Астаны у <strong class="text-dark">продавцов</strong> недвижимости цена
+                                <strong class="text-danger">падает на 1%</strong>.
+                            </p>
                         </div>
-                        <p class="mb-0 text-secondary" style="font-size: 13.5px; line-height: 1.5;">
-                            Ежедневно в 00.00 Астаны у <strong class="text-dark">продавцов</strong> недвижимости цена <strong class="text-danger">падает на 1%</strong>.
-                        </p>
+                    </div>
+                    {{-- Карточка 2 --}}
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
+                            style="background: #fff; border-radius: 50px; border: 1px solid #d4edda;">
+                            <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
+                                style="width:44px; height:44px; min-width:44px; background: #e8f5ee;">
+                                <i class="bi bi-info-circle-fill text-success fs-5"></i>
+                            </div>
+                            <p class="mb-0 text-secondary" style="font-size: 13.5px; line-height: 1.5;">
+                                Ежедневно в 00.00 Астаны у <strong class="text-dark">покупателей</strong> недвижимости цена
+                                <strong class="text-success">поднимается на 1%</strong>.
+                            </p>
+                        </div>
+                    </div>
+                    {{-- Карточка 3 --}}
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
+                            style="background: #fff; border-radius: 50px; border: 1px solid #d4edda;">
+                            <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
+                                style="width:44px; height:44px; min-width:44px; background: #e8f5ee;">
+                                <i class="bi bi-info-circle-fill text-success fs-5"></i>
+                            </div>
+                            <p class="mb-0 text-secondary" style="font-size: 13.5px; line-height: 1.5;">
+                                При совпадении цен с точностью до <strong class="text-dark">2%</strong> и основных
+                                характеристик — продавцу и покупателю высылаются <strong class="text-dark">уведомления в
+                                    WhatsApp</strong>.
+                            </p>
+                        </div>
+                    </div>
+                    {{-- Карточка 4 --}}
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
+                            style="background: #fff; border-radius: 50px; border: 1px solid #d4edda;">
+                            <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
+                                style="width:44px; height:44px; min-width:44px; background: #e8f5ee;">
+                                <i class="bi bi-info-circle-fill text-success fs-5"></i>
+                            </div>
+                            <p class="mb-0 text-secondary" style="font-size: 13.5px; line-height: 1.5;">
+                                После уведомления пользователь вносит <strong class="text-dark">депозит 1%</strong> от цены
+                                в личном кабинете и получает <strong class="text-dark">контакты контрагента</strong>.
+                            </p>
+                        </div>
                     </div>
                 </div>
-                {{-- Карточка 2 --}}
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
-                        style="background: #fff; border-radius: 50px; border: 1px solid #d4edda;">
-                        <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
-                            style="width:44px; height:44px; min-width:44px; background: #e8f5ee;">
-                            <i class="bi bi-info-circle-fill text-success fs-5"></i>
-                        </div>
-                        <p class="mb-0 text-secondary" style="font-size: 13.5px; line-height: 1.5;">
-                            Ежедневно в 00.00 Астаны у <strong class="text-dark">покупателей</strong> недвижимости цена <strong class="text-success">поднимается на 1%</strong>.
-                        </p>
-                    </div>
-                </div>
-                {{-- Карточка 3 --}}
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
-                        style="background: #fff; border-radius: 50px; border: 1px solid #d4edda;">
-                        <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
-                            style="width:44px; height:44px; min-width:44px; background: #e8f5ee;">
-                            <i class="bi bi-info-circle-fill text-success fs-5"></i>
-                        </div>
-                        <p class="mb-0 text-secondary" style="font-size: 13.5px; line-height: 1.5;">
-                            При совпадении цен с точностью до <strong class="text-dark">2%</strong> и основных характеристик — продавцу и покупателю высылаются <strong class="text-dark">уведомления в WhatsApp</strong>.
-                        </p>
-                    </div>
-                </div>
-                {{-- Карточка 4 --}}
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center gap-3 px-4 py-3 shadow-sm"
-                        style="background: #fff; border-radius: 50px; border: 1px solid #d4edda;">
-                        <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
-                            style="width:44px; height:44px; min-width:44px; background: #e8f5ee;">
-                            <i class="bi bi-info-circle-fill text-success fs-5"></i>
-                        </div>
-                        <p class="mb-0 text-secondary" style="font-size: 13.5px; line-height: 1.5;">
-                            После уведомления пользователь вносит <strong class="text-dark">депозит 1%</strong> от цены в личном кабинете и получает <strong class="text-dark">контакты контрагента</strong>.
-                        </p>
-                    </div>
-                </div>
-            </div>
             </div>
             <div class="row align-items-center g-5">
                 {{-- 📝 Форма --}}
@@ -118,7 +118,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
                             {{-- 🔹 ГОРОД (динамический) --}}
                             <div class="col-md-6">
                                 <label class="form-label small text-muted mb-1">Город</label>
@@ -127,7 +126,6 @@
                                     <option value="">Все города</option>
                                 </select>
                             </div>
-
                             {{-- 🔹 РАЙОН (динамический) --}}
                             <div class="col-md-6">
                                 <label class="form-label small text-muted mb-1">Район</label>
@@ -179,7 +177,6 @@
                             style="border-top-right-radius: 1rem;">
                             855 000 000 • РЕКОМЕНДУЕМЫЕ
                         </div>
-
                         <div class="position-absolute bottom-0 start-0 bg-white p-3 rounded-4 shadow-sm m-3"
                             style="max-width: 250px;">
                             <div class="d-flex align-items-center">
@@ -204,7 +201,6 @@
             </div>
         </div>
     </section>
-
     <section id="properties" class="properties section">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row">
@@ -216,41 +212,39 @@
             </div>
         </div>
     </section>
-    <!-- Terms Of Service Section -->
-    
-    <!-- /Terms Of Service Section -->
-
-    {{-- 💳 Способы оплаты --}}
     <section class="payment-section py-5" style="background: #f8faf9; border-top: 1px solid #dee2e6;">
         <div class="container" data-aos="fade-up">
             <div class="text-center mb-5">
                 <!-- <p class="text-uppercase fw-semibold text-success mb-2" style="letter-spacing: 1.5px; font-size: 13px;">
-                    Оплата
-                </p>
-                <h2 class="fw-bold text-dark mb-2" style="font-family: 'Poppins', sans-serif;">
-                    Способы оплаты
-                </h2> -->
+                                                Оплата
+                                            </p>
+                                            <h2 class="fw-bold text-dark mb-2" style="font-family: 'Poppins', sans-serif;">
+                                                Способы оплаты
+                                            </h2> -->
                 <!-- <p class="text-muted">Прозрачные тарифы без скрытых платежей</p> -->
             </div>
-
             <div class="row g-4 justify-content-center">
-
                 {{-- Банковские карты --}}
                 <div class="col-lg-3 col-md-6">
                     <div class="card border-0 rounded-4 shadow-sm h-100 text-center p-4">
                         <div class="mb-3 d-flex justify-content-center gap-3">
                             {{-- VISA --}}
-                            <div class="border rounded-3 px-3 py-2 d-flex align-items-center justify-content-center" style="width:90px; height:54px; background:#fff;">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 16" width="60" height="20">
-                                    <text x="0" y="14" font-family="Arial, sans-serif" font-size="16" font-weight="900" font-style="italic" fill="#1A1F71">VISA</text>
+                            <div class="border rounded-3 px-3 py-2 d-flex align-items-center justify-content-center"
+                                style="width:90px; height:54px; background:#fff;">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 16" width="60"
+                                    height="20">
+                                    <text x="0" y="14" font-family="Arial, sans-serif" font-size="16" font-weight="900"
+                                        font-style="italic" fill="#1A1F71">VISA</text>
                                 </svg>
                             </div>
                             {{-- Mastercard --}}
-                            <div class="border rounded-3 px-3 py-2 d-flex align-items-center justify-content-center gap-1" style="width:90px; height:54px; background:#fff;">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" width="54" height="34">
-                                    <circle cx="16" cy="15" r="13" fill="#EB001B"/>
-                                    <circle cx="32" cy="15" r="13" fill="#F79E1B"/>
-                                    <path d="M24 4.8a13 13 0 0 1 0 20.4A13 13 0 0 1 24 4.8z" fill="#FF5F00"/>
+                            <div class="border rounded-3 px-3 py-2 d-flex align-items-center justify-content-center gap-1"
+                                style="width:90px; height:54px; background:#fff;">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" width="54"
+                                    height="34">
+                                    <circle cx="16" cy="15" r="13" fill="#EB001B" />
+                                    <circle cx="32" cy="15" r="13" fill="#F79E1B" />
+                                    <path d="M24 4.8a13 13 0 0 1 0 20.4A13 13 0 0 1 24 4.8z" fill="#FF5F00" />
                                 </svg>
                             </div>
                         </div>
@@ -258,53 +252,33 @@
                         <p class="text-muted small mb-0">Безналичная оплата через защищённый платёжный шлюз</p>
                     </div>
                 </div>
+                @forelse ($payments as $payment)
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card border-0 rounded-4 shadow-sm h-100 p-4">
+                            <div class="mb-3 text-success" style="font-size: 28px;">
+                                <i class="bi bi-arrow-repeat"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2">{{ $payment->title }}</h5>
+                            <p class="text-muted small mb-0">
+                                {{ \Illuminate\Support\Str::limit($payment->short_desc, 90) }}
 
-                {{-- Процедура доплаты --}}
-                <div class="col-lg-3 col-md-6">
-                    <div class="card border-0 rounded-4 shadow-sm h-100 p-4">
-                        <div class="mb-3 text-success" style="font-size: 28px;">
-                            <i class="bi bi-arrow-repeat"></i>
+                                <a href="{{ route('payment.show', $payment->id) }}" class="text-success fw-semibold">
+                                    Читать →
+                                </a>
+                            </p>
                         </div>
-                        <h5 class="fw-bold text-dark mb-2">Тарифы</h5>
+                    </div>
+                @empty
+                    <div class="col-lg-3 col-md-6">
                         <p class="text-muted small mb-0">
-                           Комиссия составляет 1% от стоимости недвижимости — оплачивается отдельно Продавцом и Покупателем после совпадения цен и подтверждения сделки.
+                        <h3>Нет данных</h3>
                         </p>
                     </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="card border-0 rounded-4 shadow-sm h-100 p-4">
-                        <div class="mb-3 text-success" style="font-size: 28px;">
-                            <i class="bi bi-arrow-repeat"></i>
-                        </div>
-                        <h5 class="fw-bold text-dark mb-2">Процедура оплаты</h5>
-                        <p class="text-muted small mb-0">
-                            При изменении условий сделки оплата рассчитывается автоматически на основе актуальной рыночной цены и производится через личный кабинет.
-                        </p>
-                    </div>
-                </div>
-
-                {{-- Правила возврата --}}
-                <div class="col-lg-3 col-md-6">
-                    <div class="card border-0 rounded-4 shadow-sm h-100 p-4">
-                        <div class="mb-3 text-success" style="font-size: 28px;">
-                            <i class="bi bi-arrow-counterclockwise"></i>
-                        </div>
-                        <h5 class="fw-bold text-dark mb-2">Правила возврата</h5>
-                        <p class="text-muted small mb-0">
-                            Возврат средств возможен в течение 3 рабочих дней с момента оплаты, если сделка не была завершена. Обратитесь в поддержку через личный кабинет.
-                        </p>
-                    </div>
-                </div>
+                @endforelse
 
             </div>
-
-            
-            
-
         </div>
     </section>
-
 @endsection
 <script>
     document.addEventListener('DOMContentLoaded', function() {

@@ -3,27 +3,30 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\MatchMonitorService;
-use Illuminate\Http\Request;
-use App\Models\MatchModel;
 use App\Models\User;
+use App\Models\Listing;
+use App\Models\MatchModel;
+use App\Models\Deposit;
 
 class AdminDashboardController extends Controller
 {
     public function index()
     {
 
-      
-        $counters = [
-            'users'     => User::count(),
-            // 'listings'  => MatchModel::count(),
-            // 'matches'   => MatchModel::count(),
-            // 'awaiting'  => MatchModel::where('status', 'awaiting_deposit')->count(),
-            // 'active'    => MatchModel::where('status', 'in_progress')->count(),
-            // 'done'      => MatchModel::where('status', 'done')->count(),
-            // 'canceled'  => MatchModel::where('status', 'canceled')->count(),
-        ];
-        
-        return view('admin.dashboard', compact('counters'));
+        $users = User::count();
+        $listings = Listing::count();
+        $matches = MatchModel::count();
+        $deposits = Deposit::count();
+
+        $recentListings = Listing::latest()->limit(5)->get();
+
+        return view('admin.dashboard',compact(
+            'users',
+            'listings',
+            'matches',
+            'deposits',
+            'recentListings'
+        ));
+
     }
 }

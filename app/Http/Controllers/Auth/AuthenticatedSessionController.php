@@ -28,7 +28,13 @@ class AuthenticatedSessionController extends Controller{
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('profile.index', absolute: false));
+        // ПРОВЕРКА РОЛИ
+        if ($request->user()->is_admin) {
+            return redirect()->intended(route('admin.dashboard'));
+        }
+
+        // Если не админ, отправляем на обычный дашборд
+        return redirect()->intended(route('profile.index'));
     }
 
     /**

@@ -27,6 +27,10 @@ class User extends Authenticatable
         'accepted_offer_version',
     ];
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
