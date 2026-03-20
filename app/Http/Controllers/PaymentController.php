@@ -9,8 +9,7 @@ class PaymentController extends Controller
 
     public function show($id)
     {        
-        $section = PaymentSection::findOrFail($id);     
-        
+        $section = PaymentSection::findOrFail($id);          
         return view('payment.show',compact('section'));
 
     }

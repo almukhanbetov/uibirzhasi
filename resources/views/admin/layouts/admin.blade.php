@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>Admin Dashboard</title>
+    @stack('styles')
 </head>
 
 <body class="bg-slate-900 text-slate-200 font-sans">
@@ -25,7 +26,7 @@
             </div>
         </main>
     </div>
-
+   @stack('scripts')
 </body>
 
 </html>

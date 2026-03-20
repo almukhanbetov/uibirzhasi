@@ -9,23 +9,7 @@ class PaymentSectionSeeder extends Seeder
 {
     public function run(): void
     {
-        PaymentSection::insert([
-            [
-                'title' => 'Банковская карта',
-                'short_desc' => 'Безналичная оплата через защищённый платёжный шлюз.',
-                'long_desc' => 'Поддерживаются стандартные банковские карты для безопасной оплаты через личный кабинет.',
-                'icon' => 'bi-credit-card',               
-                'sort_order' => 1,
-                'is_active' => true,
-            ],
-            [
-                'title' => 'Тарифы',
-                'short_desc' => 'Комиссия составляет 1% от стоимости недвижимости.',
-                'long_desc' => 'Комиссия оплачивается отдельно Продавцом и Покупателем после совпадения цен и подтверждения сделки.',
-                'icon' => 'bi-arrow-repeat',               
-                'sort_order' => 2,
-                'is_active' => true,
-            ],
+        PaymentSection::insert([            
             [
                 'title' => 'Процедура оплаты',
                 'short_desc' => 'Оплата рассчитывается автоматически на основе актуальной рыночной цены.',

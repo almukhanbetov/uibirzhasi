@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Type;
 use Illuminate\Database\Seeder;
-use App\Models\{Role, User, City, District, Type, Listing};
-
 class ListingFactorySeeder extends Seeder
 {
     /**
@@ -14,10 +12,7 @@ class ListingFactorySeeder extends Seeder
     public function run(): void
     {
         // 🔹 Базовые справочники
-        $roles = ['buyer', 'seller', 'admin'];
-        foreach ($roles as $r) {
-            Role::firstOrCreate(['name' => $r]);
-        }
+        
         // $cities = ['Алматы', 'Астана', 'Шымкент', 'Актобе', 'Караганда'];
         // foreach ($cities as $c) {
         //     City::firstOrCreate(['name' => $c]);
