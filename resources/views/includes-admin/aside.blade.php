@@ -1,7 +1,7 @@
 <aside class="w-64 bg-slate-800 border-r border-slate-700 flex-shrink-0 hidden md:flex flex-col">
     <div class="p-6 flex items-center gap-3">
         <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center font-bold text-white">T</div>
-        <span class="text-xl font-bold tracking-tight">Admin Panel</span>
+        <a href="{{ route('welcome') }}"><span class="text-xl font-bold tracking-tight">Админ панель</span></a>
     </div>
     <nav class="flex-1 px-4 space-y-1 mt-4">
         <a href="#"
