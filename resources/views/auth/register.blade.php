@@ -53,10 +53,8 @@
                         </div>
                         {{-- Публичная оферта --}}
                         <div id="offerBlock" class="form-check mt-4">
-
                             <input class="form-check-input" type="checkbox" id="offerCheckbox" name="accepted_offer"
                                 value="1">
-
                             <label class="form-check-label" for="offerCheckbox">
                                 Я принимаю условия
                                 <button type="button" onclick="openOfferModal()"
@@ -64,11 +62,26 @@
                                     публичной оферты
                                 </button>
                             </label>
-
                             <div id="offerError" class="text-danger mt-1 d-none">
                                 Для регистрации необходимо принять публичную оферту
                             </div>
                         </div>
+                        {{-- Конфедициальность --}}
+                        <div id="privacyBlock" class="form-check mt-4">
+                            <input class="form-check-input" type="checkbox" id="privacyCheckbox" name="accepted_privacy"
+                                value="1">
+                            <label class="form-check-label" for="privacyCheckbox">
+                                Я принимаю условия
+                                <button type="button" onclick="openPrivacyModal()"
+                                    class="btn btn-link p-0 m-0 align-baseline text-success text-decoration-underline">
+                                    Конфедециальность
+                                </button>
+                            </label>
+                            <div id="privacyError" class="text-danger mt-1 d-none">
+                                Для регистрации необходимо принять публичную оферту
+                            </div>
+                        </div>
+
 
                         <button class="btn btn-success mt-3" type="submit">
                             Отправить <i style="margin-left:5px;" class="fa fa-sign-in"></i>
@@ -85,31 +98,55 @@
     </section>
     {{-- OFFER MODAL --}}
     <div id="offerModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-
         <div class="bg-white w-full max-w-3xl max-h-[80vh] rounded-xl border border-slate-200 flex flex-col shadow-xl">
-
             {{-- Header --}}
             <div class="flex justify-between items-center px-6 py-4 border-b border-slate-200">
                 <h2 class="text-lg font-semibold text-slate-900">Публичная оферта</h2>
-
                 <button type="button" onclick="closeOfferModal()" class="text-slate-500 hover:text-slate-900 text-xl">
                     ✕
                 </button>
             </div>
-
             {{-- Content --}}
             <div class="p-6 overflow-y-auto text-sm text-slate-800 leading-relaxed">
-                @include('offer-content')
+                @include('pages.offer-content')
             </div>
-
             {{-- Footer --}}
             <div class="px-6 py-4 border-t border-slate-200 flex justify-end gap-3">
                 <button type="button" onclick="closeOfferModal()"
                     class="px-4 py-2 rounded-lg border border-slate-300 text-slate-800 hover:bg-slate-100">
                     Отмена
                 </button>
-
                 <button type="button" onclick="acceptOffer()"
+                    class="px-4 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-500">
+                    Я принимаю
+                </button>
+            </div>
+        </div>
+    </div>
+    {{-- PRIVACY MODAL --}}
+    <div id="privacyModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+        <div class="bg-white w-full max-w-3xl max-h-[80vh] rounded-xl border border-slate-200 flex flex-col shadow-xl">
+            {{-- Header --}}
+            <div class="flex justify-between items-center px-6 py-4 border-b border-slate-200">
+                <h2 class="text-lg font-semibold text-slate-900">Конфедициальность</h2>
+
+                <button type="button" onclick="closePrivacyModal()" class="text-slate-500 hover:text-slate-900 text-xl">
+                    ✕
+                </button>
+            </div>
+            {{-- Content --}}
+            <div class="p-6 overflow-y-auto text-sm text-slate-800 leading-relaxed">
+                @include('pages.privacy')
+            </div>
+
+            {{-- Footer --}}
+            <div class="px-6 py-4 border-t border-slate-200 flex justify-end gap-3">
+                <button type="button" onclick="closePrivacyModal()"
+                    class="px-4 py-2 rounded-lg border border-slate-300 text-slate-800 hover:bg-slate-100">
+                    Отмена
+                </button>
+
+                <button type="button" onclick="acceptPrivacy()"
                     class="px-4 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-500">
                     Я принимаю
                 </button>
@@ -117,78 +154,4 @@
 
         </div>
     </div>
-
-    {{-- SCRIPT --}}
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            /* -------------------------------
-             * FORM VALIDATION (PUBLIC OFFER)
-             * ------------------------------- */
-            const form = document.getElementById('registerForm');
-            const checkbox = document.getElementById('offerCheckbox');
-            const error = document.getElementById('offerError');
-            const block = document.getElementById('offerBlock');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    if (!checkbox || !checkbox.checked) {
-                        e.preventDefault();
-
-                        if (error) {
-                            error.classList.remove('hidden');
-                        }
-
-                        if (block) {
-                            block.classList.add(
-                                'border',
-                                'border-red-500',
-                                'rounded-lg',
-                                'p-2'
-                            );
-                        }
-
-                        checkbox?.focus();
-                    }
-                });
-            }
-            /* -------------------------------
-             * OFFER MODAL CONTROLS
-             * ------------------------------- */
-            const modal = document.getElementById('offerModal');
-            window.openOfferModal = function() {
-                if (!modal) return;
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                document.body.classList.add('overflow-hidden');
-            };
-            window.closeOfferModal = function() {
-                if (!modal) return;
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-                document.body.classList.remove('overflow-hidden');
-            };
-
-            window.acceptOffer = function() {
-                if (checkbox) {
-                    checkbox.checked = true;
-                }
-
-                if (error) {
-                    error.classList.add('hidden');
-                }
-
-                if (block) {
-                    block.classList.remove(
-                        'border',
-                        'border-red-500',
-                        'rounded-lg',
-                        'p-2'
-                    );
-                }
-
-                window.closeOfferModal();
-            };
-
-        });
-    </script> --}}
-
 @endsection

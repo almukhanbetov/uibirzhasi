@@ -57,6 +57,7 @@ Route::get('/listings/ajax', [ListingController::class, 'ajaxSearch'])->name('li
 Route::get('/profile/create', [ListingController::class, 'create'])->name('listing.create');
 Route::post('/profile/create', [ListingController::class, 'store'])->name('listing.store');
 Route::get('/offer', fn() => view('pages.offer'))->name('offer');
+Route::get('/privacy', fn() => view('pages.privacy'))->name('privacy');
 Route::get('/regions', [LocationController::class, 'regions']);
 Route::get('/cities/{region}', [LocationController::class, 'cities']);
 Route::get('/districts/{city}', [LocationController::class, 'districts']);

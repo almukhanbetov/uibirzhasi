@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
-
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
@@ -28,8 +25,7 @@ class RegisteredUserController extends Controller
             $normalized = '+' . $digits;
             // кладём НАЗАД в $request
             $request->merge(['phone' => $normalized]);
-        }
-        // (опционально) посмотрим, что реально уйдёт в валидацию
+        }       
         Log::info('Регистрация: нормализация телефона', [
             'original'   => $raw,
             'normalized' => $request->input('phone'),
@@ -40,6 +36,7 @@ class RegisteredUserController extends Controller
             'phone'                 => ['required', 'string', 'regex:/^\+7\d{10}$/', 'unique:users,phone'],
             'password'              => ['required', 'confirmed', Rules\Password::defaults()],
             'accepted_offer'        => ['accepted'],
+            'accepted_privacy' => ['accepted'],
         ], [
             'name.required'     => 'Введите имя.',
             'phone.required'    => 'Введите номер телефона.',
@@ -53,10 +50,15 @@ class RegisteredUserController extends Controller
             'phone'    => $request->input('phone'),
             'password' => Hash::make($validated['password']),
             // 🔥 ОФЕРТА — ЯВНО
-            'accepted_offer' => true,
+            'accepted_offer' => $request->boolean('accepted_offer'),
             'accepted_offer_at' => now(),
             'accepted_offer_ip' => $request->ip(),
             'accepted_offer_version' => 'v1.0',
+
+            'accepted_privacy' => $request->boolean('accepted_privacy'),
+            'accepted_privacy_at' => now(),
+            'accepted_privacy_ip' => $request->ip(),
+            'accepted_privacy_version' => 'v1.0',
         ]);       
         // 🔀 Redirect в зависимости от роли
         if ($user->is_admin) {

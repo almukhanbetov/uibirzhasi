@@ -25,6 +25,10 @@ class User extends Authenticatable
         'accepted_offer_at',
         'accepted_offer_ip',
         'accepted_offer_version',
+        'accepted_privacy',
+        'accepted_privacy_at',
+        'accepted_privacy_ip',
+        'accepted_privacy_version',
     ];
 
     public function role()

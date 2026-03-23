@@ -1,52 +1,98 @@
-import "./bootstrap";
-import Alpine from "alpinejs";
-window.Alpine = Alpine;
-Alpine.start();
-/**
- * ✅ OFFER MODAL GLOBAL FUNCTIONS
- * Важно: inline onclick="..." ищет функции в window
- */
-window.openOfferModal = function () {  
+// 1. Функции управления модальными окнами Оферты
+window.openOfferModal = function () {
     const modal = document.getElementById("offerModal");
     if (!modal) return;
     modal.classList.remove("hidden");
-    modal.classList.add("flex");
+    modal.classList.add("flex"); // Для центрирования контента
+    document.body.style.overflow = 'hidden'; // Блокировка прокрутки сайта
 };
+
 window.closeOfferModal = function () {
     const modal = document.getElementById("offerModal");
     if (!modal) return;
     modal.classList.add("hidden");
     modal.classList.remove("flex");
+    document.body.style.overflow = 'auto';
 };
+
+// Функция кнопки "Я принимаю" внутри модалки оферты
 window.acceptOffer = function () {
     const checkbox = document.getElementById("offerCheckbox");
-    const error = document.getElementById("offerError");
-    const block = document.getElementById("offerBlock");
-    if (checkbox) checkbox.checked = true;
-    // ✅ скрыть ошибку (bootstrap)
-    if (error) error.classList.add("d-none");
-    // ✅ убрать подсветку ошибки если добавляли
-    if (block) block.classList.remove("border", "border-danger", "p-2", "rounded");
+    const errorBlock = document.getElementById("offerError");
+    
+    if (checkbox) {
+        checkbox.checked = true; // Ставим галочку
+    }
+    
+    if (errorBlock) {
+        errorBlock.classList.add("d-none"); // Скрываем ошибку, если она была
+    }
+    
     window.closeOfferModal();
 };
-/**
- * ✅ VALIDATION ON SUBMIT
- */
+
+// 2. Функции управления модальными окнами Конфиденциальности
+window.openPrivacyModal = function () {
+    const modal = document.getElementById("privacyModal");
+    if (!modal) return;
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    document.body.style.overflow = 'hidden';
+};
+
+window.closePrivacyModal = function () {
+    const modal = document.getElementById("privacyModal");
+    if (!modal) return;
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+    document.body.style.overflow = 'auto';
+};
+
+// Функция кнопки "Я принимаю" внутри модалки конфиденциальности
+window.acceptPrivacy = function () {
+    const checkbox = document.getElementById("privacyCheckbox");
+    const errorBlock = document.getElementById("privacyError");
+    
+    if (checkbox) {
+        checkbox.checked = true;
+    }
+    
+    if (errorBlock) {
+        errorBlock.classList.add("d-none");
+    }
+    
+    window.closePrivacyModal();
+};
+
+// 3. Валидация формы при отправке
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("registerForm");
     if (!form) return;
-    const checkbox = document.getElementById("offerCheckbox");
-    const error = document.getElementById("offerError");
-    const block = document.getElementById("offerBlock");
-    if (!checkbox || !error || !block) return;
+
+    const offerCheckbox = document.getElementById("offerCheckbox");
+    const privacyCheckbox = document.getElementById("privacyCheckbox");
+
     form.addEventListener("submit", (e) => {
-        if (!checkbox.checked) {
+        let hasError = false;
+
+        // Проверка оферты
+        if (!offerCheckbox || !offerCheckbox.checked) {
             e.preventDefault();
-            // ✅ показать ошибку
-            error.classList.remove("d-none");
-            // ✅ подсветить блок (bootstrap)
-            block.classList.add("border", "border-danger", "p-2", "rounded");
-            checkbox.focus();
+            const err = document.getElementById("offerError");
+            if (err) err.classList.remove("d-none");
+            hasError = true;
+        }
+
+        // Проверка конфиденциальности
+        if (!privacyCheckbox || !privacyCheckbox.checked) {
+            e.preventDefault();
+            const err = document.getElementById("privacyError");
+            if (err) err.classList.remove("d-none");
+            hasError = true;
+        }
+
+        if (hasError) {
+            console.log("Форма не отправлена: не приняты условия.");
         }
     });
 });
