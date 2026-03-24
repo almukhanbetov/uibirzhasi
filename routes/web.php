@@ -27,7 +27,7 @@ Route::get('/test-telegram', function () {
         ->send(Auth::user()->telegram_id, 'Локально работает 🚀');
 });
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('index');
     Route::resource('deposits', AdminDepositController::class)->only(['index', 'show', 'update']);
     Route::resource('matches', AdminMatchController::class)->only(['index', 'show', 'update']);
     Route::resource('listings', AdminListingController::class);
