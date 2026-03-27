@@ -21,7 +21,19 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\PageBlockController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PaymentSectionController;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
+// 1. Сюда мы будем переходить, чтобы улететь на оплату
+Route::get('/pay-test', function () {
+    return 'Здесь будет кнопка оплаты. Если вы это видите, маршрут работает.';
+});
+
+// 2. Сюда банк пришлет ответ (Result URL)
+Route::post('/payment/result', function (Request $request) {
+    Log::info('Freedom Pay Callback received!', $request->all());
+    return response()->make('<?xml version="1.0" encoding="UTF-8"?><response><pg_status>ok</pg_status></response>', 200, ['Content-Type' => 'text/xml']);
+});
 Route::get('/test-telegram', function () {
     app(\App\Services\TelegramService::class)
         ->send(Auth::user()->telegram_id, 'Локально работает 🚀');
