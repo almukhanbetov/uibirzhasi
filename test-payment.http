@@ -1,0 +1,7 @@
+POST https://uibirzhasi.kz/payment/result
+Content-Type: application/json
+
+{
+    "pg_order_id": "test_123",
+    "pg_result": "1"
+}
