@@ -73,7 +73,7 @@ Route::get('/privacy', fn() => view('pages.privacy'))->name('privacy');
 Route::get('/regions', [LocationController::class, 'regions']);
 Route::get('/cities/{region}', [LocationController::class, 'cities']);
 Route::get('/districts/{city}', [LocationController::class, 'districts']);
-Route::get('/payment/{id}', [App\Http\Controllers\PaymentController::class,'show'])->name('payment.show');
+// Route::get('/payment/{id}', [App\Http\Controllers\PaymentController::class,'show'])->name('payment.show');
 Route::middleware('auth')->group(function () {
     Route::post('/matches/{match}/deposit', [\App\Http\Controllers\MatchDepositController::class, 'store'])
         ->name('matches.deposit');
