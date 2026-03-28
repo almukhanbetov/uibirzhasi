@@ -1,34 +1,51 @@
 <?php
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Payment extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'title',
-        'short_desc',
-        'long_desc',
-        'icon',
-        'sort_order',
-        'is_active',
+        'user_id',
+        'order_id',
+        'pg_payment_id',
+        'amount',
+        'currency',
+        'status',
+        'payment_details'
     ];
 
-    // Типизация для удобства
     protected $casts = [
-        'is_active' => 'boolean',
-        'sort_order' => 'integer',
+        'payment_details' => 'array',
     ];
 
     /**
-     * Скоуп для получения только активных секций в нужном порядке
+     * Связь с пользователем
      */
-    public function scopeActive($query)
+    public function user()
     {
-        return $query->where('is_active', true)->orderBy('sort_order', 'asc');
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Метод для успешного завершения платежа
+     */
+    public function markAsSuccess($pgPaymentId, $details = [])
+    {
+        // Используем транзакцию базы данных для надежности
+        DB::transaction(function () use ($pgPaymentId, $details) {
+            if ($this->status !== 'success') {
+                $this->update([
+                    'status' => 'success',
+                    'pg_payment_id' => $pgPaymentId,
+                    'payment_details' => $details
+                ]);
+
+                // Пополняем баланс пользователя в ТОО "СРА"
+                // Предполагаем, что у модели User есть поле 'balance'
+                $this->user->increment('balance', $this->amount);
+            }
+        });
     }
 }

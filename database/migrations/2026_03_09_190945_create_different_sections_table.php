@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payment_sections', function (Blueprint $table) {
+        Schema::create('different_sections', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('short_desc')->nullable(); // короткий текст

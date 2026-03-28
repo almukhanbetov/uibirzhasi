@@ -3,7 +3,7 @@
     <div class="p-8 bg-slate-900 min-h-screen">
         <div class="max-w-4xl mx-auto">
             <form
-                action="{{ $section->exists ? route('payment_sections.update', $section) : route('payment_sections.store') }}"
+                action="{{ $section->exists ? route('different_sections.update', $section) : route('different_sections.store') }}"
                 method="POST" class="space-y-6">
                 @csrf
                 @if ($section->exists)
@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="px-8 py-6 bg-slate-900/30 border-t border-slate-700 flex justify-end gap-4">
-                        <a href="{{ route('payment_sections.index') }}"
+                        <a href="{{ route('different_sections.index') }}"
                             class="px-6 py-2.5 text-slate-400 hover:text-white transition-colors">Отмена</a>
                         <button type="submit"
                             class="bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-2.5 rounded-xl font-bold shadow-lg shadow-indigo-500/20 transition-all">

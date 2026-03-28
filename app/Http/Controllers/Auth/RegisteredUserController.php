@@ -62,7 +62,7 @@ class RegisteredUserController extends Controller
         ]);       
         // 🔀 Redirect в зависимости от роли
         if ($user->is_admin) {
-            return redirect('/admin');
+            return redirect('admin');
         }
         return redirect()->route('profile.index');
     }

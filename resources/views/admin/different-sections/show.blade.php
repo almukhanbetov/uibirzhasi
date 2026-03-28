@@ -4,7 +4,7 @@
         <div class="max-w-4xl mx-auto">
             <div class="flex items-center justify-between mb-8">
                 <div class="flex items-center gap-4">
-                    <a href="{{ route('admin.payment-sections.index') }}"
+                    <a href="{{ route('admin.different-sections.index') }}"
                         class="p-2.5 bg-slate-800 border border-slate-700 text-slate-400 hover:text-white rounded-xl transition-all">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="flex gap-3">
-                    <a href="{{ route('admin.payment-sections.edit', $section) }}"
+                    <a href="{{ route('admin.different-sections.edit', $section) }}"
                         class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg shadow-indigo-500/20">
                         Редактировать
                     </a>

@@ -10,7 +10,7 @@
                 </p>
             </div>
 
-            <a href="{{ route('admin.payment-sections.create') }}"
+            <a href="{{ route('admin.different-sections.create') }}"
                 class="inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-lg shadow-indigo-500/20 active:scale-95">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -70,7 +70,7 @@
 
                                 <td class="px-6 py-4 text-right">
                                     <div class="flex justify-end items-center gap-2">
-                                        <a href="{{ route('admin.payment-sections.show', $section) }}"
+                                        <a href="{{ route('admin.different-sections.show', $section) }}"
                                             class="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded-lg transition-all"
                                             title="Просмотр">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,7 +82,7 @@
                                             </svg>
                                         </a>
 
-                                        <a href="{{ route('admin.payment-sections.edit', $section) }}"
+                                        <a href="{{ route('admin.different-sections.edit', $section) }}"
                                             class="p-2 text-slate-400 hover:text-indigo-400 hover:bg-indigo-500/10 rounded-lg transition-all"
                                             title="Редактировать">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,7 +92,7 @@
                                             </svg>
                                         </a>
 
-                                        <form action="{{ route('admin.payment-sections.destroy', $section) }}"
+                                        <form action="{{ route('admin.different-sections.destroy', $section) }}"
                                             method="POST" class="inline"
                                             onsubmit="return confirm('Вы уверены? Это действие нельзя отменить.')">
                                             @csrf

@@ -1,21 +1,21 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\Models\PaymentSection;
+use App\Models\DifferentSection;
 use Illuminate\Http\Request;
-class PaymentSectionController extends Controller
+class DifferentSectionController extends Controller
 {
     public function index()
     {
-        $sections = PaymentSection::orderBy('sort_order', 'asc')->get();    
+        $sections = DifferentSection::orderBy('sort_order', 'asc')->get();    
     
-        return view('admin.payment-sections.index', compact('sections'));
+        return view('admin.different-sections.index', compact('sections'));
     }
     public function create()
     {
-        $section = new PaymentSection();
+        $section = new DifferentSection();
        
-        return view('admin.payment-sections.create', compact('section'));
+        return view('admin.different-sections.create', compact('section'));
     }
     public function store(Request $request)
     {
@@ -29,21 +29,21 @@ class PaymentSectionController extends Controller
         ]);
         // Если порядок не указан, ставим в конец
         if (!isset($data['sort_order'])) {
-            $data['sort_order'] = PaymentSection::max('sort_order') + 1;
+            $data['sort_order'] = DifferentSection::max('sort_order') + 1;
         }
-        PaymentSection::create($data);
-        return redirect()->route('admin.payment-sections.index')->with('success', 'Секция оплаты создана');
+        DifferentSection::create($data);
+        return redirect()->route('admin.different-sections.index')->with('success', 'Секция оплаты создана');
     }
-    public function show(PaymentSection $payment_section)
+    public function show(DifferentSection $different_section)
     {
-        return view('admin.payment-sections.show', ['section' => $payment_section]);
+        return view('admin.different-sections.show', ['section' => $different_section]);
     }
-    public function edit(PaymentSection $payment_section)
+    public function edit(DifferentSection $different_section)
     {
-        return view('admin.payment-sections.edit', ['section' => $payment_section]);
+        return view('admin.different-sections.edit', ['section' => $different_section]);
     }
 
-    public function update(Request $request, PaymentSection $paymentSection)
+    public function update(Request $request, DifferentSection $differentSection)
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
@@ -56,14 +56,14 @@ class PaymentSectionController extends Controller
         // Обработка чекбокса (если его нет в запросе — значит false)
         $data['is_active'] = $request->has('is_active');
 
-        $paymentSection->update($data);
+        $differentSection->update($data);
 
-        return redirect()->route('admin.payment-sections.index')->with('success', 'Данные обновлены');
+        return redirect()->route('admin.different-sections.index')->with('success', 'Данные обновлены');
     }
 
-    public function destroy(PaymentSection $paymentSection)
+    public function destroy(DifferentSection $differentSection)
     {
-        $paymentSection->delete();
+        $differentSection->delete();
         return back()->with('success', 'Секция удалена');
     }
 }

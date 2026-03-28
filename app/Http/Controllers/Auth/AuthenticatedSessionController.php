@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller{
 
         // ПРОВЕРКА РОЛИ
         if ($request->user()->is_admin) {
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect()->intended(route('/admin'));
         }
 
         // Если не админ, отправляем на обычный дашборд

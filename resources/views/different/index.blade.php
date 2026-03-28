@@ -6,7 +6,7 @@
             <h1 class="text-2xl font-bold text-white">Секции оплаты</h1>
             <p class="text-slate-400 text-sm mt-1">Управление блоками на странице оплаты</p>
         </div>
-        <a href="{{ route('payment_sections.create') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-indigo-500/20 transition-all">
+        <a href="{{ route('different_sections.create') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-indigo-500/20 transition-all">
             + Добавить секцию
         </a>
     </div> --}}
@@ -31,10 +31,10 @@
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <a href="{{ route('payment_sections.edit', $section) }}" class="p-2.5 bg-slate-900 border border-slate-700 text-slate-400 hover:text-indigo-400 rounded-xl transition-all">
+                <a href="{{ route('different_sections.edit', $section) }}" class="p-2.5 bg-slate-900 border border-slate-700 text-slate-400 hover:text-indigo-400 rounded-xl transition-all">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                 </a>                
-                <form action="{{ route('payment_sections.destroy', $section) }}" method="POST" onsubmit="return confirm('Удалить эту секцию?')">
+                <form action="{{ route('different_sections.destroy', $section) }}" method="POST" onsubmit="return confirm('Удалить эту секцию?')">
                     @csrf @method('DELETE')
                     <button class="p-2.5 bg-slate-900 border border-slate-700 text-slate-400 hover:text-red-400 rounded-xl transition-all">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>

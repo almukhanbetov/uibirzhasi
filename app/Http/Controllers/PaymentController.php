@@ -1,15 +1,22 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 class PaymentController extends Controller
 {
+    public function index()
+    {
+        $user = Auth::user();      
+        // Если таблицы PaymentSection нет, можно временно передать пустой массив или 
+        // создать объект вручную для теста вида:
+        $sections = []; 
 
+        $payments = Payment::where('user_id', $user->id)->latest()->take(10)->get();
 
+        return view('payments.index', compact('user', 'sections', 'payments'));
+    }
     public function init(Request $request)
     {
         $user = Auth::user()->id;
@@ -35,7 +42,6 @@ class PaymentController extends Controller
             'pg_success_url' => route('payment.success'),
             'pg_failure_url' => route('payment.failure'),
         ];
-
         // 3. Генерация подписи
         $params['pg_sig'] = $this->makeSignature('init_payment.php', $params);
 
@@ -43,13 +49,22 @@ class PaymentController extends Controller
         $query = http_build_query($params);
         return redirect()->away("https://api.freedompay.money/init_payment.php?{$query}");
     }
-
     private function makeSignature($scriptName, $params)
     {
         ksort($params); // Сортировка по ключам обязательна
         array_unshift($params, $scriptName);
         array_push($params, config('services.freedom.secret_key'));
         return md5(implode(';', $params));
+    }
+    public function success()
+    {
+        // Мы просто показываем файл из resources/views/payments/success.blade.php
+        return view('payments.success');
+    }
+    public function failure()
+    {
+        // Мы просто показываем файл из resources/views/payments/failure.blade.php
+        return view('payments.failure');
     }
     
 

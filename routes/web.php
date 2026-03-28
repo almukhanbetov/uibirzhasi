@@ -13,6 +13,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Admin\AdminMatchController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\DifferentSectionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\MatchController;
@@ -20,7 +21,8 @@ use App\Http\Controllers\OfferController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\PageBlockController;
 use App\Http\Controllers\Admin\PageController;
-use App\Http\Controllers\Admin\PaymentSectionController;
+
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 // 2. Сюда банк пришлет ответ (Result URL)
@@ -32,7 +34,20 @@ Route::post('/payment/result', function (Request $request) {
 Route::get('/pay-test', function () {
     return 'Здесь будет кнопка оплаты. Если вы это видите, маршрут работает.';
 });
+// 2. ЗАЩИЩЕННЫЕ МАРШРУТЫ (Для ваших пользователей)
+Route::middleware(['auth'])->group(function () {
+    
+    // Личный кабинет (где кнопка "Пополнить" и таблица)
+    Route::get('/', [PaymentController::class, 'index'])->name('index');
 
+    // Инициация оплаты (вызывается формой из модального окна)
+    Route::post('/payment/init', [PaymentController::class, 'init'])->name('payment.init');
+
+    // Страницы возврата (куда банк перенаправляет браузер клиента)
+    Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('/payment/failure', [PaymentController::class, 'failure'])->name('payment.failure');
+    
+});
 
 Route::get('/test-telegram', function () {
     app(\App\Services\TelegramService::class)
@@ -43,7 +58,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('deposits', AdminDepositController::class)->only(['index', 'show', 'update']);
     Route::resource('matches', AdminMatchController::class)->only(['index', 'show', 'update']);
     Route::resource('listings', AdminListingController::class);
-    Route::resource('payment-sections', PaymentSectionController::class);
+    Route::resource('/different-sections', DifferentSectionController::class);
+    
+  
     Route::resource('users', AdminUserController::class)->only(['index', 'show', 'update']);
 
     Route::resource('pages', PageController::class);
@@ -80,7 +97,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::middleware(['auth', 'offer.accepted'])->group(function () {
     // Личный кабинет
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // Недвижимость
     Route::resource('listings', ListingController::class);
     // Запросы покупателей

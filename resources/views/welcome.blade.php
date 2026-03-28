@@ -212,7 +212,7 @@
             </div>
         </div>
     </section>
-    <section class="payment-section py-5" style="background: #f8faf9; border-top: 1px solid #dee2e6;">
+    <section class="different-section py-5" style="background: #f8faf9; border-top: 1px solid #dee2e6;">
         <div class="container" data-aos="fade-up">
             <div class="text-center mb-5">
                 <!-- <p class="text-uppercase fw-semibold text-success mb-2" style="letter-spacing: 1.5px; font-size: 13px;">
@@ -252,17 +252,17 @@
                         <p class="text-muted small mb-0">Безналичная оплата через защищённый платёжный шлюз</p>
                     </div>
                 </div>
-                @forelse ($payments as $payment)
+                @forelse ($differents as $different)
                     <div class="col-lg-3 col-md-6">
                         <div class="card border-0 rounded-4 shadow-sm h-100 p-4">
                             <div class="mb-3 text-success" style="font-size: 28px;">
                                 <i class="bi bi-arrow-repeat"></i>
                             </div>
-                            <h5 class="fw-bold text-dark mb-2">{{ $payment->title }}</h5>
+                            <h5 class="fw-bold text-dark mb-2">{{ $different->title }}</h5>
                             <p class="text-muted small mb-0">
-                                {{ \Illuminate\Support\Str::limit($payment->short_desc, 90) }}
+                                {{ \Illuminate\Support\Str::limit($different->short_desc, 90) }}
 
-                                <a href="{{ route('payment.show', $payment->id) }}" class="text-success fw-semibold">
+                                <a href="{{ route('different.show', $different->id) }}" class="text-success fw-semibold">
                                     Читать →
                                 </a>
                             </p>

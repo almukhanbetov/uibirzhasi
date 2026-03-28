@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin')
 @section('admin')
     <div class="max-w-4xl mx-auto">
-        <form action="{{ route('admin.payment-sections.store') }}" method="POST">
+        <form action="{{ route('admin.different-sections.store') }}" method="POST">
             @csrf
             <div class="bg-slate-800 border border-slate-700 rounded-3xl overflow-hidden shadow-2xl">
                 <div class="px-8 py-6 border-b border-slate-700 bg-slate-800/50 flex justify-between items-center">
@@ -14,11 +14,11 @@
                 </div>
 
                 <div class="p-8 grid grid-cols-1 gap-6">
-                    @include('admin.payment-sections.partials.fields')
+                    @include('admin.different-sections.partials.fields')
                 </div>
 
                 <div class="px-8 py-6 bg-slate-900/30 border-t border-slate-700 flex justify-end gap-4">
-                    <a href="{{ route('admin.payment-sections.index') }}"
+                    <a href="{{ route('admin.different-sections.index') }}"
                         class="px-6 py-2.5 text-slate-400 hover:text-white transition-colors text-sm font-medium">Отмена</a>
                     <button type="submit"
                         class="bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-2.5 rounded-xl font-bold shadow-lg shadow-indigo-500/20 transition-all active:scale-95">
