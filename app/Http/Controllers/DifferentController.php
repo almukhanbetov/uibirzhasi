@@ -9,8 +9,9 @@ class DifferentController extends Controller
 {
     public function show($id)
     {
-        $different = DifferentSection::findOrFail($id);
+        $section = DifferentSection::findOrFail($id);
+       
 
-        return view('different.show', compact('different'));
+        return view('different.show', compact('section'));
     }
 }
