@@ -14,14 +14,14 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Admin\AdminMatchController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\DifferentSectionController;
-use App\Http\Controllers\DashboardController;
+
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\MatchController;
 use App\Http\Controllers\OfferController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\PageBlockController;
 use App\Http\Controllers\Admin\PageController;
-
+use App\Http\Controllers\DifferentController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
@@ -71,6 +71,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('blocks/{block}', [PageBlockController::class, 'update'])->name('blocks.update');
     Route::delete('blocks/{block}', [PageBlockController::class, 'destroy'])->name('blocks.destroy');
 });
+Route::get('/different/{id}', [DifferentController::class, 'show'])
+    ->name('different.show');
 Route::post('/telegram/webhook', [TelegramWebhookController::class, 'handle']);
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/sale', [WelcomeController::class, 'sale'])->name('welcome.sale');
