@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDepositController;
 use App\Http\Controllers\Admin\AdminListingController;
@@ -14,7 +13,6 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Admin\AdminMatchController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\DifferentSectionController;
-
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\MatchController;
 use App\Http\Controllers\OfferController;
@@ -27,8 +25,28 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 // 2. Сюда банк пришлет ответ (Result URL)
 Route::post('/payment/result', function (Request $request) {
-    Log::info('Freedom Pay Callback received!', $request->all());
-    return response()->make('<?xml version="1.0" encoding="UTF-8"?><response><pg_status>ok</pg_status></response>', 200, ['Content-Type' => 'text/xml']);
+    $data = $request->all();
+    $payment = \App\Models\Payment::where('order_id', $data['pg_order_id'])->first();
+    if (!$payment) {
+        return response('NOT FOUND', 404);
+    }
+    if ($data['pg_status'] === 'ok') {
+        $payment->update([
+            'status' => 'success',
+            'pg_payment_id' => $data['pg_payment_id'],
+            'payment_details' => json_encode($data)
+        ]);
+    } else {
+        $payment->update([
+            'status' => 'rejected',
+            'payment_details' => json_encode($data)
+        ]);
+    }
+    return response(
+        '<?xml version="1.0" encoding="UTF-8"?><response><pg_status>ok</pg_status></response>',
+        200,
+        ['Content-Type' => 'text/xml']
+    );
 });
 // 1. Сюда мы будем переходить, чтобы улететь на оплату
 Route::get('/pay-test', function () {
@@ -36,19 +54,17 @@ Route::get('/pay-test', function () {
 });
 // 2. ЗАЩИЩЕННЫЕ МАРШРУТЫ (Для ваших пользователей)
 Route::middleware(['auth'])->group(function () {
-    
+    Route::post('/payment/result', [PaymentController::class, 'result'])
+    ->name('payment.result');    
     // Личный кабинет (где кнопка "Пополнить" и таблица)
-    Route::get('/', [PaymentController::class, 'index'])->name('index');
-
+    Route::get('/payments', [PaymentController::class, 'index'])->name('index');
     // Инициация оплаты (вызывается формой из модального окна)
     Route::post('/payment/init', [PaymentController::class, 'init'])->name('payment.init');
-
     // Страницы возврата (куда банк перенаправляет браузер клиента)
     Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
     Route::get('/payment/failure', [PaymentController::class, 'failure'])->name('payment.failure');
     
 });
-
 Route::get('/test-telegram', function () {
     app(\App\Services\TelegramService::class)
         ->send(Auth::user()->telegram_id, 'Локально работает 🚀');
@@ -58,11 +74,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('deposits', AdminDepositController::class)->only(['index', 'show', 'update']);
     Route::resource('matches', AdminMatchController::class)->only(['index', 'show', 'update']);
     Route::resource('listings', AdminListingController::class);
-    Route::resource('/different-sections', DifferentSectionController::class);
-    
-  
+    Route::resource('/different-sections', DifferentSectionController::class);  
     Route::resource('users', AdminUserController::class)->only(['index', 'show', 'update']);
-
     Route::resource('pages', PageController::class);
     Route::get('pages/{page}/blocks', [PageBlockController::class, 'index'])->name('pages.blocks.index');
     Route::get('pages/{page}/blocks/create', [PageBlockController::class, 'create'])->name('pages.blocks.create');
@@ -97,14 +110,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/matches/{match}/deposit', [\App\Http\Controllers\MatchDepositController::class, 'store'])
         ->name('matches.deposit');
 });
-Route::middleware(['auth', 'offer.accepted'])->group(function () {
-    // Личный кабинет
-    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    // Недвижимость
-    Route::resource('listings', ListingController::class);
-    // Запросы покупателей
-    // Route::resource('requests', BuyRequestController::class);
-    // Депозиты / сделки
+Route::middleware(['auth', 'offer.accepted'])->group(function () {   
+    Route::resource('listings', ListingController::class);    
     Route::post('/matches/{id}/deposit', [DepositController::class, 'store']);
 });
 Route::get('/offer/accept', [OfferController::class, 'show'])
@@ -131,5 +138,4 @@ Route::middleware('auth')->group(function () {
     //    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     //    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
 require __DIR__ . '/auth.php';
