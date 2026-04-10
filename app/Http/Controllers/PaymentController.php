@@ -5,7 +5,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-
 class PaymentController extends Controller
 {
     public function index()
@@ -40,53 +39,27 @@ class PaymentController extends Controller
             'pg_order_id'    => $payment->order_id,
             'pg_description' => "Пополнение баланса ТОО СРА для пользователя #{$user->id}",
             'pg_salt'        => bin2hex(random_bytes(12)),
-            'pg_result_url'  => route('payment.result'),
-            'pg_success_url' => route('payment.success'),
-            'pg_failure_url' => route('payment.failure'),
-        ];    
-        // ЛОГ ЗАПРОСА
-    Log::info('FreedomPay REQUEST', $params);
-
+            'pg_result_url' => 'https://uibirzhasi.kz/payment/result',
+            'pg_success_url' => 'https://uibirzhasi.kz/payment/success',
+            'pg_failure_url' => 'https://uibirzhasi.kz/payment/failure',
+        ];     
     // ПОДПИСЬ
-    ksort($params);
-
-    $values = array_values($params);
-    array_unshift($values, 'init_payment.php');
-    array_push($values, config('freedom.secret_key'));
-
-    $signatureString = implode(';', $values);
-    $pg_sig = md5($signatureString);
-
-    // ЛОГ ПОДПИСИ
-    Log::info('FreedomPay SIGNATURE', [
-        'string' => $signatureString,
-        'pg_sig' => $pg_sig,
-    ]);
-
-    $params['pg_sig'] = $pg_sig;
-
-    // URL
-    $query = http_build_query($params);
-    $url = "https://api.freedompay.kz/init_payment.php?$query";
-
-    // ЛОГ URL
-    Log::info('FreedomPay URL', ['url' => $url]);
-
-    $response = file_get_contents($url);
-
-    // ЛОГ ОТВЕТА
-    Log::info('FreedomPay RESPONSE', [
-        'response' => $response
-    ]);
-
-    dd($response);    
-        // // 3. Генерация подписи
-        // $params['pg_sig'] = $this->makeSignature('init_payment.php', $params);
-        // // 4. Формируем URL для редиректа        
-        // $query = http_build_query($params);
-        // // 👇 ЛОГИРУЕМ
-       
-        // return redirect()->away("https://api.freedompay.kz/init_payment.php?$query");
+        ksort($params);
+        $values = array_values($params);
+        array_unshift($values, 'init_payment.php');
+        array_push($values, config('freedom.secret_key'));
+        $signatureString = implode(';', $values);
+        $pg_sig = md5($signatureString);
+        // ЛОГ ПОДПИСИ
+        Log::info('FreedomPay SIGNATURE', [
+            'string' => $signatureString,
+            'pg_sig' => $pg_sig,
+        ]);
+        $params['pg_sig'] = $pg_sig;
+        // URL
+        $query = http_build_query($params);
+        $url = "https://api.freedompay.kz/init_payment.php?$query";    
+        return redirect()->away($url);
     }
     private function makeSignature($scriptName, $params)
     {
@@ -105,7 +78,5 @@ class PaymentController extends Controller
     {
         // Мы просто показываем файл из resources/views/payments/failure.blade.php
         return view('payments.failure');
-    }
-    
-
+    }    
 }
