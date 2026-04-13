@@ -16,12 +16,9 @@ class PaymentController extends Controller
         $payments = Payment::where('user_id', $user->id)->latest()->take(10)->get();     
         return view('payments.index', compact('user', 'sections', 'payments'));
     }
-    public function init(Request $request)
-    {
-        // dd(
-        //     config('freedom.merchant_id'),
-        //     config('freedom.secret_key') ? 'OK' : 'NULL'
-        // );
+    public function init(Request $request)    {
+       
+        
         $user = Auth::user();
         $amount = $request->input('amount', 1000); // Сумма из модального окна
         // 1. Создаем запись в нашей БД (pending)
@@ -44,22 +41,23 @@ class PaymentController extends Controller
             'pg_failure_url' => 'https://uibirzhasi.kz/payment/failure',
         ];     
     // ПОДПИСЬ
+             // 3. подпись
         ksort($params);
+
         $values = array_values($params);
         array_unshift($values, 'init_payment.php');
-        array_push($values, config('freedom.secret_key'));
-        $signatureString = implode(';', $values);
-        $pg_sig = md5($signatureString);
-        // ЛОГ ПОДПИСИ
-        Log::info('FreedomPay SIGNATURE', [
-            'string' => $signatureString,
-            'pg_sig' => $pg_sig,
-        ]);
-        $params['pg_sig'] = $pg_sig;
-        // URL
-        $query = http_build_query($params);
-        $url = "https://api.freedompay.kz/init_payment.php?$query";    
-        return redirect()->away($url);
+        array_push($values, config('services.freedom.secret_key'));
+
+        $signature = md5(implode(';', $values));
+
+        $params['pg_sig'] = $signature;
+
+        // лог
+        Log::info('FreedomPay FORM', $params);
+
+        // 4. ВАЖНО: возвращаем VIEW, а не redirect
+        return view('payments.redirect', compact('params'));
+            
     }
     private function makeSignature($scriptName, $params)
     {
