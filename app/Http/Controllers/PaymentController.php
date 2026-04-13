@@ -40,8 +40,11 @@ class PaymentController extends Controller
             'pg_success_url' => 'https://uibirzhasi.kz/payment/success',
             'pg_failure_url' => 'https://uibirzhasi.kz/payment/failure',
         ];     
-    // ПОДПИСЬ
+        // 🔥 ЛОГ ПАРАМЕТРОВ (добавь тут)
+        Log::info('FreedomPay REQUEST', $params);
+        // ПОДПИСЬ
              // 3. подпись
+        unset($params['pg_sig']);
         ksort($params);
 
         $values = array_values($params);
@@ -69,6 +72,9 @@ class PaymentController extends Controller
         }
         $values[] = config('services.freedom.secret_key');
         return md5(implode(';', $values));
+        Log::info('FreedomPay SIGN STRING', [
+            'string' => implode(';', $values),
+        ]);
     }
     public function success()
     {
