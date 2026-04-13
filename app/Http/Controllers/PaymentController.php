@@ -59,12 +59,15 @@ class PaymentController extends Controller
         return view('payments.redirect', compact('params'));
             
     }
-    private function makeSignature($scriptName, $params)
-    {
+    private function makeSignature($script, $params)
+{
         ksort($params);
-        $values = array_values($params);
-        array_unshift($values, $scriptName);
-        array_push($values, config('services.freedom.secret_key'));
+        $values = [];
+        $values[] = $script;
+        foreach ($params as $key => $value) {
+            $values[] = $value;
+        }
+        $values[] = config('services.freedom.secret_key');
         return md5(implode(';', $values));
     }
     public function success()
