@@ -16,8 +16,9 @@ class PaymentController extends Controller
         $payments = Payment::where('user_id', $user->id)->latest()->take(10)->get();     
         return view('payments.index', compact('user', 'sections', 'payments'));
     }
-    public function init(Request $request)    {     
-             
+    public function init(Request $request)    {    
+        dd('INIT WORKS'); 
+        dd(config('services.freedom.merchant_id')); // 👈 ВСТАВЬ СЮДА         
         $user = Auth::user();
         $amount = $request->input('amount', 1000); // Сумма из модального окна
         // 1. Создаем запись в нашей БД (pending)
