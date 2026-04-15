@@ -17,7 +17,7 @@ class PaymentController extends Controller
         return view('payments.index', compact('user', 'sections', 'payments'));
     }
     public function init(Request $request)    {     
-        dd(config('services.freedom.merchant_id')); // 👈 ВСТАВЬ СЮДА         
+             
         $user = Auth::user();
         $amount = $request->input('amount', 1000); // Сумма из модального окна
         // 1. Создаем запись в нашей БД (pending)
