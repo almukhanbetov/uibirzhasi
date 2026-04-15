@@ -13,6 +13,10 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+    'freedom' => [
+        'merchant_id' => env('FREEDOM_MERCHANT_ID'),
+        'secret_key' => env('FREEDOM_SECRET_KEY'),
+    ],
     'telegram' => [
         'token' => env('TELEGRAM_BOT_TOKEN'),
     ],
