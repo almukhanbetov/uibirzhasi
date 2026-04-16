@@ -20,6 +20,9 @@
             <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
                 Оплатить через Freedom Pay
             </button>
+            <button type="submit" style="background:red;color:white;padding:10px;">
+                TEST PAY 🚀
+            </button>
         </form>
         <hr class="my-6">
         <h2 class="text-lg font-semibold mb-3">История платежей</h2>

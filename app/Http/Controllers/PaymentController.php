@@ -16,6 +16,7 @@ class PaymentController extends Controller
         $payments = Payment::where('user_id', $user->id)->latest()->take(10)->get();     
         return view('payments.index', compact('user', 'sections', 'payments'));
     }
+    
     public function init(Request $request)    {    
         // dd('INIT WORKS'); 
         // dd(config('services.freedom.merchant_id')); // 👈 ВСТАВЬ СЮДА         
@@ -62,8 +63,73 @@ class PaymentController extends Controller
         return view('payments.redirect', compact('params'));
             
     }
+    public function result(Request $request)
+    {
+        Log::info('FreedomPay CALLBACK', $request->all());
+
+        $data = $request->all();
+
+        // 🔐 проверка подписи
+        $pg_sig = $data['pg_sig'];
+        unset($data['pg_sig']);
+
+        ksort($data);
+
+        $values = array_values($data);
+        array_unshift($values, 'result.php');
+        array_push($values, config('services.freedom.secret_key'));
+
+        $check_sig = md5(implode(';', $values));
+
+        if ($check_sig !== $pg_sig) {
+            Log::error('SIGNATURE INVALID');
+            return response('error', 400);
+        }
+
+        // 🔍 находим платеж
+        $payment = \App\Models\Payment::where('order_id', $data['pg_order_id'])->first();
+
+        if (!$payment) {
+            return response('payment not found', 404);
+        }
+
+        // ✅ если успешно
+        if ($data['pg_result'] == 1) {
+
+            if ($payment->status !== 'success') {
+
+                $payment->status = 'success';
+                $payment->save();
+
+                // 💰 начисляем баланс
+                $user = $payment->user;
+                $user->balance += $payment->amount;
+                $user->save();
+
+                Log::info('BALANCE UPDATED', [
+                    'user_id' => $user->id,
+                    'balance' => $user->balance
+                ]);
+            }
+        } else {
+            $payment->status = 'failed';
+            $payment->save();
+        }
+
+        return response('ok', 200);
+    }
+    public function success()
+    {
+        // Мы просто показываем файл из resources/views/payments/success.blade.php
+        return view('payments.success');
+    }
+    public function failure()
+    {
+        // Мы просто показываем файл из resources/views/payments/failure.blade.php
+        return view('payments.failure');
+    }    
     private function makeSignature($script, $params)
-{
+    {
         ksort($params);
         $values = [];
         $values[] = $script;
@@ -76,14 +142,5 @@ class PaymentController extends Controller
             'string' => implode(';', $values),
         ]);
     }
-    public function success()
-    {
-        // Мы просто показываем файл из resources/views/payments/success.blade.php
-        return view('payments.success');
-    }
-    public function failure()
-    {
-        // Мы просто показываем файл из resources/views/payments/failure.blade.php
-        return view('payments.failure');
-    }    
+    
 }
