@@ -60,7 +60,27 @@ class PaymentController extends Controller
         Log::info('FreedomPay FORM', $params);
 
         // 4. ВАЖНО: возвращаем VIEW, а не redirect
-        return view('payments.redirect', compact('params'));
+        // return view('payments.redirect', compact('params'));
+        // ✅ ВМЕСТО ЭТОГО:
+
+        $response = Http::asForm()->post(
+            'https://api.freedompay.kz/init_payment.php',
+            $params
+        );
+
+        Log::info('FreedomPay RESPONSE', [
+            'body' => $response->body()
+        ]);
+
+        $xml = simplexml_load_string($response->body());
+
+        if (!$xml || !isset($xml->pg_redirect_url)) {
+            dd('Ошибка FreedomPay', $response->body());
+        }
+
+        $redirectUrl = (string) $xml->pg_redirect_url;
+
+        return redirect()->away($redirectUrl);
             
     }
     public function result(Request $request)
