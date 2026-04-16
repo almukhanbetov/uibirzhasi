@@ -14,7 +14,9 @@
             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
         @endforeach
     </form>
-
+    <script>
+        alert('REDIRECT PAGE');
+    </script>
     <script>
         document.getElementById('freedompay').submit();
     </script>
