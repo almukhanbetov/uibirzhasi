@@ -57,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/payment/result', [PaymentController::class, 'result'])
     ->name('payment.result');    
     // Личный кабинет (где кнопка "Пополнить" и таблица)
-    Route::get('/payments', [PaymentController::class, 'index'])->name('index');
+    Route::get('/payments', [PaymentController::class, 'index'])->name('payment.index');
     // Инициация оплаты (вызывается формой из модального окна)
     Route::post('/payment/init', [PaymentController::class, 'init'])->name('payment.init');
     // Страницы возврата (куда банк перенаправляет браузер клиента)

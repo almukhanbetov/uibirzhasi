@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\MatchModel;
 use App\Models\Deposit;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DepositController extends Controller
