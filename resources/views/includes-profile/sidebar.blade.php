@@ -1,78 +1,5 @@
 <div class="col-12 col-md-3 col-lg-2 bg-white border-end vh-100 p-3">
 
-    <h5 class="fw-bold mb-3 text-success">📁 Меню</h5>
-
-    {{-- Пользователь --}}
-    <div class="mb-3 p-2 bg-light rounded">
-        <div class="fw-bold">{{ auth()->user()->name }}</div>
-        <small class="text-muted">{{ auth()->user()->phone ?? 'Телефон не указан' }}</small>
-    </div>
-
-    {{-- Баланс --}}
-    <div class="mb-3">
-        <small class="text-muted">Баланс депозита</small>
-        <div class="fw-bold text-success fs-5">
-            {{ number_format(auth()->user()->deposit ?? 0,0,'.',' ') }} ₸
-        </div>
-    </div>
-
-    <ul class="nav flex-column sidebar-menu">
-
-        <li class="nav-item mb-2">
-            <a href="{{ route('profile.index') }}" class="nav-link sidebar-link active">
-                📋 Мои объявления
-                <span class="badge bg-success float-end">
-                    {{ auth()->user()->listings()->count() }}
-                </span>
-            </a>
-        </li>
-
-        <li class="nav-item mb-2">
-            <a href="{{ route('profile.matches.index') }}" class="nav-link sidebar-link">
-                🤝 Найденные пары
-                <span class="badge bg-secondary float-end">0</span>
-            </a>
-        </li>
-
-        <li class="nav-item mb-2">
-            <a href="#" class="nav-link sidebar-link">
-                📑 Сделки
-                <span class="badge bg-secondary float-end">0</span>
-            </a>
-        </li>
-
-        <li class="nav-item mb-2">
-            <a href="#" class="nav-link sidebar-link">
-                🔔 Уведомления
-                <span class="badge bg-danger float-end">0</span>
-            </a>
-        </li>
-
-    </ul>
-
-    <hr>
-
-    <a href="{{ route('payment.index') }}"
-       class="btn btn-success w-100 mb-2 rounded-pill">
-        💰 Внести депозит
-    </a>
-
-    <a href="{{ route('profile.create') }}"
-       class="btn btn-outline-success w-100 rounded-pill">
-        ➕ Добавить объявление
-    </a>
-
-    <hr>
-
-    <small class="text-muted d-block">🏆 Статус: Базовый</small>
-    <small class="text-muted d-block">
-        📅 На сайте: {{ auth()->user()->created_at->format('d.m.Y') }}
-    </small>
-
-</div>
-
-{{-- <div class="col-12 col-md-3 col-lg-2 bg-white border-end vh-100 p-3">
-
     <h5 class="fw-bold mb-4 text-success">📁 Меню</h5>
 
     <ul class="nav flex-column sidebar-menu">
@@ -134,4 +61,4 @@
 
     </ul>
 
-</div> --}}
+</div>
