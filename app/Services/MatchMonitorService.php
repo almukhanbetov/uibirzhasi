@@ -10,29 +10,39 @@ use Illuminate\Support\Facades\Log;
 
 class MatchMonitorService
 {
-    public function checkListingForMatch(Listing $changed): void
+   public function checkListingForMatch(Listing $changed): void
     {
-        // Проверяем только активные объявления
+        Log::info('MATCH SERVICE START', [
+            'listing_id' => $changed->id,
+            'type' => $changed->deal_type,
+            'price' => $changed->price_current,
+        ]);
+
         if ($changed->status !== Listing::STATUS_ACTIVE) {
             return;
         }
+
         $tolerance = config('match.price_tolerance_pct', 2);
-        // Определяем противоположный тип
+
         $opposite = $changed->deal_type === Listing::DEAL_SALE
             ? Listing::DEAL_BUY
             : Listing::DEAL_SALE;
-        // Ищем объявления с такими же характеристиками
+
         $candidates = Listing::query()
             ->where('deal_type', $opposite)
             ->where('status', Listing::STATUS_ACTIVE)
             ->where('id', '!=', $changed->id)
-            // 🔽 ТУТ СОПСТАВЛЯЕМ ХАРАКТЕРИСТИКИ
             ->where('city_id', $changed->city_id)
             ->where('district_id', $changed->district_id)
             ->where('type_id', $changed->type_id)
             ->get();
+
+        Log::info('CANDIDATES COUNT', [
+            'count' => $candidates->count(),
+        ]);
+
         foreach ($candidates as $other) {
-            // Определяем кто BUY / SELL
+
             if ($changed->deal_type === Listing::DEAL_BUY) {
                 $buy  = $changed;
                 $sale = $other;
@@ -40,11 +50,23 @@ class MatchMonitorService
                 $buy  = $other;
                 $sale = $changed;
             }
-            // Считаем разницу в %
+
+            Log::info('CHECKING PAIR', [
+                'buy_id' => $buy->id,
+                'sale_id' => $sale->id,
+            ]);
+
             $diffPct = abs($buy->price_current - $sale->price_current)
                 / max($buy->price_current, $sale->price_current)
                 * 100;
+
+            Log::info('DIFF', [
+                'diffPct' => $diffPct,
+            ]);
+
             if ($diffPct <= $tolerance) {
+
+                Log::info('MATCH CONDITION PASSED');
 
                 $this->createCandidateMatch($buy, $sale);
             }

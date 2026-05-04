@@ -1,16 +1,12 @@
 <?php
-
 namespace App\Jobs;
-
 use App\Models\MatchModel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
-
 class ExpireStuckMatchesJob implements ShouldQueue
 {
     use Queueable;
-
     /**
      * Create a new job instance.
      */
@@ -18,7 +14,6 @@ class ExpireStuckMatchesJob implements ShouldQueue
     {
         //
     }
-
     /**
      * Execute the job.
      */
