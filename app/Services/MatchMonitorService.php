@@ -1,13 +1,10 @@
 <?php
-
 namespace App\Services;
-
 use App\Models\Listing;
 use App\Models\MatchModel;
 use App\Models\StatusHistory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
 class MatchMonitorService
 {
    public function checkListingForMatch(Listing $changed): void
@@ -17,17 +14,13 @@ class MatchMonitorService
             'type' => $changed->deal_type,
             'price' => $changed->price_current,
         ]);
-
         if ($changed->status !== Listing::STATUS_ACTIVE) {
             return;
         }
-
         $tolerance = config('match.price_tolerance_pct', 2);
-
         $opposite = $changed->deal_type === Listing::DEAL_SALE
             ? Listing::DEAL_BUY
             : Listing::DEAL_SALE;
-
         $candidates = Listing::query()
             ->where('deal_type', $opposite)
             ->where('status', Listing::STATUS_ACTIVE)
@@ -36,13 +29,10 @@ class MatchMonitorService
             ->where('district_id', $changed->district_id)
             ->where('type_id', $changed->type_id)
             ->get();
-
         Log::info('CANDIDATES COUNT', [
             'count' => $candidates->count(),
         ]);
-
         foreach ($candidates as $other) {
-
             if ($changed->deal_type === Listing::DEAL_BUY) {
                 $buy  = $changed;
                 $sale = $other;
@@ -50,12 +40,10 @@ class MatchMonitorService
                 $buy  = $other;
                 $sale = $changed;
             }
-
             Log::info('CHECKING PAIR', [
                 'buy_id' => $buy->id,
                 'sale_id' => $sale->id,
             ]);
-
             $diffPct = abs($buy->price_current - $sale->price_current)
                 / max($buy->price_current, $sale->price_current)
                 * 100;
@@ -88,6 +76,9 @@ class MatchMonitorService
                     'sale_price' => $sale->price_current,
                     'final_price' => round(($buy->price_current + $sale->price_current) / 2, 2),
                     'status'     => 'awaiting_deposit',
+
+                    // 🔥 ТАЙМЕР СДЕЛКИ
+                    'expires_at' => now()->addHours(24),
                 ]
             );
 

@@ -3,6 +3,7 @@ namespace App\Jobs;
 use App\Models\MatchModel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 class ExpireStuckMatchesJob implements ShouldQueue
 {
@@ -20,27 +21,49 @@ class ExpireStuckMatchesJob implements ShouldQueue
     public function handle(): void
     {
         $matches = MatchModel::where('status', 'awaiting_deposit')
-            ->where('created_at', '<=', now()->subDays(3))
+            ->whereNotNull('expires_at')
+            ->where('expires_at', '<=', now())
             ->get();
 
         foreach ($matches as $match) {
 
-            // 1. помечаем сделку как просроченную
-            $match->update(['status' => 'expired']);
+            DB::transaction(function () use ($match) {
 
-            // 2. возвращаем объявления на рынок
-            if ($match->buyListing) {
-                $match->buyListing->update(['status' => 'active']);
-            }
+                // ❌ отменяем сделку
+                $match->update([
+                    'status' => 'expired'
+                ]);
 
-            if ($match->sellListing) {
-                $match->sellListing->update(['status' => 'active']);
-            }
+                // 🔄 возвращаем объявления
+                if ($match->buyListing) {
+                    $match->buyListing->update(['status' => 'active']);
+                }
 
-            // 3. (опционально) лог
-            Log::info('EXPIRED MATCH', [
-                'match' => $match->id,
-            ]);
+                if ($match->sellListing) {
+                    $match->sellListing->update(['status' => 'active']);
+                }
+
+                // 💸 ВОЗВРАТ ДЕПОЗИТОВ
+                foreach ($match->deposits as $deposit) {
+
+                    if ($deposit->status === 'paid') {
+
+                        $deposit->update([
+                            'status' => 'refunded'
+                        ]);
+
+                        Log::info('DEPOSIT REFUNDED', [
+                            'match_id' => $match->id,
+                            'user_id' => $deposit->user_id,
+                            'amount' => $deposit->amount,
+                        ]);
+                    }
+                }
+
+                Log::info('MATCH EXPIRED + REFUNDED', [
+                    'match_id' => $match->id
+                ]);
+            });
         }
     }
 }

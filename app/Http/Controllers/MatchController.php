@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\MatchModel;
 use Illuminate\Support\Facades\Auth;
-
 class MatchController extends Controller
 {
     public function index()
@@ -61,14 +58,12 @@ class MatchController extends Controller
             'buyerListing.user',
             'sellerListing.user',
             'deposits'
-        ])->findOrFail($id);
-           
+        ])->findOrFail($id);           
         abort_unless(
             $match->buyer_id === Auth::user()->id ||
                 $match->seller_id === Auth::user()->id,
             403
         );
-
         return view('matches.show', compact('match'));
     }
     // public function show($id){
