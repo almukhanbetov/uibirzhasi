@@ -1,4 +1,9 @@
+<<<<<<< Updated upstream
 <div class="max-w-3xl mx-auto my-10 bg-white text-black rounded-xl shadow-lg border border-gray-200">
+=======
+    <div class="max-w-4xl mx-auto py-12 px-4 prose prose-invert mt-5">
+        <h1>Публичная оферта 11</h1>
+>>>>>>> Stashed changes
 
     <!-- Header -->
     <div class="flex justify-between items-center px-6 py-4 border-b">
