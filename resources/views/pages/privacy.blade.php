@@ -1,5 +1,4 @@
 <div class="max-w-3xl mx-auto my-10 bg-white text-black rounded-xl shadow-lg border border-gray-200">
-
     <div class="max-w-4xl mx-auto py-12 px-4 prose prose-invert mt-5">
         <h1>Политика конфиденциальности персональных данных</h1>
 
@@ -11,14 +10,11 @@
             </h2>
             <button class="text-gray-400 hover:text-gray-700 text-xl">&times;</button>
         </div>
-
         <!-- Content -->
         <div class="px-8 py-6 max-h-[70vh] overflow-y-auto leading-relaxed text-[15px]">
-
             <h1 class="text-2xl font-bold text-green-700 mb-4">
                 Политика конфиденциальности персональных данных
             </h1>
-
             <p class="text-sm text-gray-700"><strong>Версия:</strong> 1.0</p>
             <p class="text-sm text-gray-700 mb-4"><strong>Дата публикации:</strong> 30.04.2026</p>
 
@@ -28,7 +24,6 @@
                 <strong>uibirzhasi.kz</strong> — ТОО «СРА» (далее — Сервис) и Пользователем
                 в соответствии со ст. 387 ГК РК и Законом РК «О персональных данных и их защите».
             </p>
-
 
             <h2 class="text-lg font-semibold text-green-700 mt-6 mb-2">
                 1. Определение терминов
