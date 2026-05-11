@@ -21,7 +21,7 @@ class UpdateListingPricesJob implements ShouldQueue
             $listings = Listing::where('status', Listing::STATUS_ACTIVE)
                 ->where(function ($q) {
                     $q->whereNull('last_price_change_at')
-                        ->orWhere('last_price_change_at', '<', now()->subMinutes(5));
+                        ->orWhere('last_price_change_at', '<', now()->subDay());
                 })
                 ->get();
             foreach ($listings as $listing) {

@@ -19,8 +19,12 @@ Artisan::command('inspire', function () {
 // Schedule::job(new UpdateListingPricesJob)
 //     ->everyFiveMinutes()
 //     ->name('listing-auto-step');
+// Schedule::job(new UpdateListingPricesJob)
+//     ->everyFiveMinutes()
+//     ->name('update-listing-prices');
 Schedule::job(new UpdateListingPricesJob)
-    ->everyFiveMinutes()
+    ->dailyAt('00:00')
+    ->timezone('Asia/Almaty')
     ->name('update-listing-prices');
 Schedule::job(new CheckStuckMatchesJob)
     ->hourly()
