@@ -170,14 +170,17 @@
                 {{-- 🏞 Правая картинка --}}
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
                     <div class="position-relative">
-                        <img src="{{ asset('assets/img/real-estate/property-exterior-3.webp') }}"
-                            class="img-fluid rounded-4 shadow-lg" alt="Property">
+                        {{-- <img src="{{ asset('assets/img/real-estate/property-exterior-3.webp') }}"
+                            class="img-fluid rounded-4 shadow-lg" alt="Property"> --}}
+                        <img src="{{ asset('images/payments/halyk-qr.jpeg') }}"
+                            class="img-fluid rounded-4 shadow-lg bg-white p-3"
+                            style="max-height: 420px; object-fit: contain;" alt="Halyk QR">
 
-                        <div class="position-absolute top-0 end-0 bg-success text-white px-3 py-2 rounded-end-4 rounded-bottom-0 fw-semibold"
+                        {{-- <div class="position-absolute top-0 end-0 bg-success text-white px-3 py-2 rounded-end-4 rounded-bottom-0 fw-semibold"
                             style="border-top-right-radius: 1rem;">
                             855 000 000 • РЕКОМЕНДУЕМЫЕ
-                        </div>
-                        <div class="position-absolute bottom-0 start-0 bg-white p-3 rounded-4 shadow-sm m-3"
+                        </div> --}}
+                        {{-- <div class="position-absolute bottom-0 start-0 bg-white p-3 rounded-4 shadow-sm m-3"
                             style="max-width: 250px;">
                             <div class="d-flex align-items-center">
                                 <img src="{{ asset('assets/img/real-estate/agent-4.webp') }}" class="rounded-circle me-2"
@@ -195,7 +198,7 @@
                                 <i class="bi bi-star-half"></i>
                                 <span class="text-muted ms-1">4.9 (127)</span>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -216,11 +219,11 @@
         <div class="container" data-aos="fade-up">
             <div class="text-center mb-5">
                 <!-- <p class="text-uppercase fw-semibold text-success mb-2" style="letter-spacing: 1.5px; font-size: 13px;">
-                                                        Оплата
-                                                    </p>
-                                                    <h2 class="fw-bold text-dark mb-2" style="font-family: 'Poppins', sans-serif;">
-                                                        Способы оплаты
-                                                    </h2> -->
+                                                                Оплата
+                                                            </p>
+                                                            <h2 class="fw-bold text-dark mb-2" style="font-family: 'Poppins', sans-serif;">
+                                                                Способы оплаты
+                                                            </h2> -->
                 <!-- <p class="text-muted">Прозрачные тарифы без скрытых платежей</p> -->
             </div>
             <div class="row g-4 justify-content-center">
