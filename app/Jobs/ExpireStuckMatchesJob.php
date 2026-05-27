@@ -28,12 +28,10 @@ class ExpireStuckMatchesJob implements ShouldQueue
         foreach ($matches as $match) {
 
             DB::transaction(function () use ($match) {
-
                 // ❌ отменяем сделку
                 $match->update([
                     'status' => 'expired'
                 ]);
-
                 // 🔄 возвращаем объявления
                 if ($match->buyListing) {
                     $match->buyListing->update(['status' => 'active']);
@@ -42,7 +40,6 @@ class ExpireStuckMatchesJob implements ShouldQueue
                 if ($match->sellListing) {
                     $match->sellListing->update(['status' => 'active']);
                 }
-
                 // 💸 ВОЗВРАТ ДЕПОЗИТОВ
                 foreach ($match->deposits as $deposit) {
 
@@ -59,7 +56,6 @@ class ExpireStuckMatchesJob implements ShouldQueue
                         ]);
                     }
                 }
-
                 Log::info('MATCH EXPIRED + REFUNDED', [
                     'match_id' => $match->id
                 ]);

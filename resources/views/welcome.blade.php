@@ -8,7 +8,7 @@
                     Впервые в мире биржа недвижимости
                 </p>
                 <h1 class="fw-bold display-5 text-dark mb-3" style="font-family: 'Poppins', sans-serif;">
-                    UIBIRZHASI.KZ
+                    UIBIRZHASI.KZ1
                 </h1>
                 <p class="lead text-muted" style="max-width: 600px; margin: 0 auto;">
                     <span class="text-success fw-semibold">Мы гарантируем, что продадим вашу недвижимость. </span>
