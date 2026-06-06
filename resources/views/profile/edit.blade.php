@@ -86,6 +86,20 @@
                                 </div>
                             </div>
 
+                            {{-- Карта --}}
+                            <div class="col-12">
+                                <label class="form-label small text-muted mb-1">
+                                    Местоположение на карте <span class="text-muted">(кликните, чтобы поставить метку)</span>
+                                </label>
+                                <div id="map-picker" style="height: 300px; border-radius: 12px; border: 1px solid #c3e6cb;"></div>
+                                <input type="hidden" name="latitude"  id="lat-input"  value="{{ old('latitude', $listing->latitude) }}">
+                                <input type="hidden" name="longitude" id="lng-input"  value="{{ old('longitude', $listing->longitude) }}">
+                                <div id="coords-display" class="small text-muted mt-1" style="{{ ($listing->latitude && $listing->longitude) ? '' : 'display:none;' }}">
+                                    Координаты: <span id="coords-text">{{ $listing->latitude }}, {{ $listing->longitude }}</span>
+                                    <a href="#" id="clear-marker" class="ms-2 text-danger" style="font-size:0.8rem;">✕ убрать метку</a>
+                                </div>
+                            </div>
+
                             {{-- Площадь, комнаты, цена --}}
                             <div class="col-md-3">
                                 <div class="form-floating">
@@ -269,5 +283,85 @@
             }
 
         });
+    </script>
+
+    {{-- Leaflet map picker --}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+    (function () {
+        const latInput      = document.getElementById('lat-input');
+        const lngInput      = document.getElementById('lng-input');
+        const display       = document.getElementById('coords-display');
+        const coordsText    = document.getElementById('coords-text');
+        const clearBtn      = document.getElementById('clear-marker');
+        const citySelect    = document.getElementById('city');
+        const districtSelect = document.getElementById('district');
+
+        const savedLat = parseFloat(latInput.value) || 43.2220;
+        const savedLng = parseFloat(lngInput.value) || 76.8512;
+        const hasCoords = latInput.value && lngInput.value;
+
+        const map = L.map('map-picker').setView([savedLat, savedLng], hasCoords ? 16 : 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        let marker = hasCoords ? L.marker([savedLat, savedLng]).addTo(map) : null;
+
+        map.on('click', function (e) {
+            const { lat, lng } = e.latlng;
+            placeMarker(lat, lng);
+        });
+
+        clearBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (marker) { marker.remove(); marker = null; }
+            latInput.value = '';
+            lngInput.value = '';
+            display.style.display = 'none';
+        });
+
+        // Автоцентрирование при смене района → города
+        if (districtSelect) {
+            districtSelect.addEventListener('change', function () {
+                const name = this.options[this.selectedIndex]?.text;
+                if (name && name !== 'Выберите район') {
+                    geocodeAndCenter(name + ', Казахстан', 14);
+                }
+            });
+        }
+
+        if (citySelect) {
+            citySelect.addEventListener('change', function () {
+                const name = this.options[this.selectedIndex]?.text;
+                if (name && name !== 'Выберите город') {
+                    geocodeAndCenter(name + ', Казахстан', 12);
+                }
+            });
+        }
+
+        function geocodeAndCenter(query, zoom) {
+            fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + encodeURIComponent(query), {
+                headers: { 'Accept-Language': 'ru' }
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.length > 0) {
+                    map.setView([parseFloat(data[0].lat), parseFloat(data[0].lon)], zoom);
+                }
+            })
+            .catch(() => {});
+        }
+
+        function placeMarker(lat, lng) {
+            if (marker) marker.remove();
+            marker = L.marker([lat, lng]).addTo(map);
+            latInput.value = lat.toFixed(7);
+            lngInput.value = lng.toFixed(7);
+            coordsText.textContent = lat.toFixed(5) + ', ' + lng.toFixed(5);
+            display.style.display = 'block';
+        }
+    })();
     </script>
 @endsection

@@ -33,7 +33,7 @@
                                 @endif
                             </div>
                         @else
-                            <img src="{{ asset('storage/images/no-image.png') }}" alt="Нет фото"
+                            <img src="{{ asset('images/no-image.png') }}" alt="Нет фото"
                                 class="img-fluid rounded" style="object-fit: cover; height: 300px;">
                         @endif
                         {{-- Overlay --}}

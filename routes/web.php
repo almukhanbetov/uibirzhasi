@@ -97,6 +97,7 @@ Route::get('/login', fn() => view('login'))->name('login');
 Route::get('/listings', [ListingController::class, 'index'])->name('listings.index');
 Route::get('/listings/create', [ListingController::class, 'create'])->name('listings.create');
 Route::get('/listings/show/{id}', [ListingController::class, 'show'])->name('listings.show');
+Route::get('/listings/{id}', fn($id) => redirect()->route('listings.show', $id));
 Route::get('/listings/ajax', [ListingController::class, 'ajaxSearch'])->name('listings.ajax');
 Route::get('/profile/create', [ListingController::class, 'create'])->name('listing.create');
 Route::post('/profile/create', [ListingController::class, 'store'])->name('listing.store');
@@ -111,7 +112,7 @@ Route::middleware('auth')->group(function () {
         ->name('matches.deposit');
 });
 Route::middleware(['auth', 'offer.accepted'])->group(function () {   
-    Route::resource('listings', ListingController::class);    
+    Route::resource('listings', ListingController::class)->except(['show']);
     Route::post('/matches/{id}/deposit', [DepositController::class, 'store']);
 });
 Route::get('/offer/accept', [OfferController::class, 'show'])

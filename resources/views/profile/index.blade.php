@@ -35,7 +35,7 @@
                                 <img src="{{ asset($listing->photos->first()->url) }}" alt="Фото" width="60"
                                     height="40" style="object-fit: cover;">
                             @else
-                                <img src="{{ asset('storage/images/no-image.png') }}" alt="Нет фото" width="60"
+                                <img src="{{ asset('images/no-image.png') }}" alt="Нет фото" width="60"
                                     height="40">
                             @endif
                         </td>

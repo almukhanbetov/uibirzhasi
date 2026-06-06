@@ -24,7 +24,7 @@
                 <img src="{{ asset($listing->photos->first()->url) }}" class="w-100" alt="Фото недвижимости"
                     style="max-height:400px;object-fit:cover;">
             @else
-                <img src="{{ asset('images/no-photo.jpg') }}" class="w-100" alt="Нет фото"
+                <img src="{{ asset('images/no-image.png') }}" class="w-100" alt="Нет фото"
                     style="max-height:400px;object-fit:cover;">
             @endif
             <div class="card-body p-4">

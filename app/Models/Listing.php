@@ -34,6 +34,8 @@ class Listing extends Model
         'last_price_change_at',
         'status',          // active | matched | expired | closed
         'description',
+        'latitude',
+        'longitude',
     ];
     protected $casts = [
         'last_price_change_at' => 'datetime',

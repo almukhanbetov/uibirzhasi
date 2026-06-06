@@ -23,7 +23,9 @@ class ListingStoreRequest extends FormRequest
             'rooms'         => 'required|integer|min:1|max:20',
             'price_base'    => 'required|numeric|min:1',
             'description'   => 'nullable|string|max:2000',
-            'photos.*'      => 'nullable|mimes:jpg,jpeg,png,webp|max:2048'
+            'photos.*'      => 'nullable|mimes:jpg,jpeg,png,webp|max:2048',
+            'latitude'      => 'nullable|numeric|between:-90,90',
+            'longitude'     => 'nullable|numeric|between:-180,180',
         ];
     }
     public function messages(): array
