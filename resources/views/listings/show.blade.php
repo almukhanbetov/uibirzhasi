@@ -147,16 +147,17 @@
                     <!-- Agent Info -->
                     <div class="agent-info">
                         <div class="agent-avatar">
-                            <img src="{{ asset('assets/img/real-estate/agent-3.webp') }}" alt="Продавец" class="img-fluid">
+                            @php $userName = optional($listing->user)->name ?? 'П'; @endphp
+                            <div style="
+                                width: 56px; height: 56px; border-radius: 50%;
+                                background: #176c61; color: #fff;
+                                display: flex; align-items: center; justify-content: center;
+                                font-size: 1.4rem; font-weight: 700; flex-shrink: 0;
+                            ">{{ mb_strtoupper(mb_substr($userName, 0, 1)) }}</div>
                         </div>
                         <div class="agent-details">
-                            <h4>{{ optional($listing->user)->name ?? 'Пользователь' }}</h4>
-                            @if(optional($listing->user)->phone)
-                                <p class="agent-phone"><i class="bi bi-telephone"></i> {{ $listing->user->phone }}</p>
-                            @endif
-                            @if(optional($listing->user)->email)
-                                <p class="agent-email"><i class="bi bi-envelope"></i> {{ $listing->user->email }}</p>
-                            @endif
+                            <h4>{{ $userName }}</h4>
+                            <p class="text-muted small">Контакты доступны после сделки</p>
                         </div>
                     </div>
 

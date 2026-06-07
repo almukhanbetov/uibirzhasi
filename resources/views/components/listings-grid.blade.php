@@ -56,13 +56,14 @@
                             <span style="color: green;">&#8376; {{ $listing->price_base }}</span>
                         </div>
                         <div class="property-agent">
-                            <img src="{{ asset('assets/img/real-estate/agent-1.webp') }}" alt="Agent"
-                                class="agent-avatar">
+                            <div style="
+                                width: 36px; height: 36px; border-radius: 50%;
+                                background: #176c61; color: #fff;
+                                display: flex; align-items: center; justify-content: center;
+                                font-size: 0.95rem; font-weight: 700; flex-shrink: 0;
+                            ">{{ mb_strtoupper(mb_substr($listing->user->name ?? 'П', 0, 1)) }}</div>
                             <div class="agent-info">
                                 <strong>{{ $listing->user->name }}</strong>
-                                <div class="agent-contact">
-                                    <small><i class="bi bi-telephone"></i>{{ $listing->user->phone }}</small>
-                                </div>
                             </div>
                         </div>
                         <a href="{{ route('listings.show', $listing->id) }}" class="btn btn-primary w-100">Детальный
