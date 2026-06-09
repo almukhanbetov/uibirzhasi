@@ -32,7 +32,7 @@ class ProfileUpdateRequest extends FormRequest
             'rooms' => 'required|integer|min:1',
             'price_base' => 'required|numeric|min:0',
             'description' => 'nullable|string|max:5000',
-            'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
+            'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10096',
         ];
     }
     public function messages(): array

@@ -24,7 +24,7 @@ class ProfileListingRequest extends FormRequest
             'price_base' => 'required|numeric|min:0',
             'description' => 'nullable|string|max:5000',
             'photos' => 'nullable|array|min:1',
-            'photos.*' => 'image|mimes:jpeg,png,jpg,webp|max:4096',
+            'photos.*' => 'image|mimes:jpeg,png,jpg,webp|max:10096',
         ];
     }
     public function messages(): array
