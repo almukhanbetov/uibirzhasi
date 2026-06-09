@@ -21,17 +21,18 @@
                         <div class="row g-3">
                             <div class="col-md-3">
                                 <div class="form-floating">
-                                    <select name="deal_type" class="form-select" required>
+                                    <select name="deal_type" class="form-select @error('deal_type') is-invalid @enderror" required>
                                         <option value="sale" @selected(old('deal_type', $listing->deal_type) == 'sale')>Продажа</option>
                                         <option value="buy" @selected(old('deal_type', $listing->deal_type) == 'buy')>Покупка</option>
                                     </select>
                                     <label>Тип сделки</label>
                                 </div>
+                                @error('deal_type')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
                             </div>
                             {{-- Тип --}}
                             <div class="col-md-3">
                                 <div class="form-floating">
-                                    <select name="type_id" class="form-select" required>
+                                    <select name="type_id" class="form-select @error('type_id') is-invalid @enderror" required>
                                         <option value="">Выберите тип</option>
                                         @foreach ($types as $t)
                                             <option value="{{ $t->id }}" @selected(old('type_id', $listing->type_id) == $t->id)>
@@ -41,10 +42,11 @@
                                     </select>
                                     <label>Тип недвижимости 1</label>
                                 </div>
+                                @error('type_id')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
                             </div>
                             <div class="col-md-3">
                                 <div class="form-floating">
-                                    <select id="region" name="region_id" class="form-select" required>
+                                    <select id="region" name="region_id" class="form-select @error('region_id') is-invalid @enderror" required>
                                         <option value="">Выберите регион</option>
                                         @foreach ($regions as $region)
                                             <option value="{{ $region->id }}" @selected(old('region_id', $listing->region_id) == $region->id)>
@@ -54,12 +56,13 @@
                                     </select>
                                     <label>Регионы</label>
                                 </div>
+                                @error('region_id')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
                             </div>
 
                             {{-- Город --}}
                             <div class="col-md-3">
                                 <div class="form-floating">
-                                    <select id="city" name="city_id" class="form-select" required>
+                                    <select id="city" name="city_id" class="form-select @error('city_id') is-invalid @enderror" required>
                                         <option value="">Выберите город</option>
                                         @foreach ($cities as $c)
                                             <option value="{{ $c->id }}" @selected(old('city_id', $listing->city_id) == $c->id)>
@@ -69,12 +72,13 @@
                                     </select>
                                     <label>Город</label>
                                 </div>
+                                @error('city_id')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
                             </div>
 
                             {{-- Район --}}
                             <div class="col-md-3">
                                 <div class="form-floating">
-                                    <select id="district" name="district_id" class="form-select" required>
+                                    <select id="district" name="district_id" class="form-select @error('district_id') is-invalid @enderror" required>
                                         <option value="">Выберите район</option>
                                         @foreach ($districts as $d)
                                             <option value="{{ $d->id }}" @selected(old('district_id', $listing->district_id) == $d->id)>
@@ -84,6 +88,7 @@
                                     </select>
                                     <label>Район</label>
                                 </div>
+                                @error('district_id')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
                             </div>
 
                             {{-- Карта --}}
@@ -103,40 +108,46 @@
                             {{-- Площадь, комнаты, цена --}}
                             <div class="col-md-3">
                                 <div class="form-floating">
-                                    <input type="number" step="0.1" name="area" class="form-control"
-                                        value="{{ $listing->area }}">
+                                    <input type="number" step="0.1" name="area" class="form-control @error('area') is-invalid @enderror"
+                                        value="{{ old('area', $listing->area) }}">
                                     <label>Площадь (м²)</label>
                                 </div>
+                                @error('area')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
                             </div>
 
                             <div class="col-md-3">
                                 <div class="form-floating">
-                                    <input type="number" name="rooms" class="form-control" value="{{ $listing->rooms }}"
-                                        required>
+                                    <input type="number" name="rooms" class="form-control @error('rooms') is-invalid @enderror"
+                                        value="{{ old('rooms', $listing->rooms) }}" required>
                                     <label>Комнат</label>
                                 </div>
+                                @error('rooms')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
                             </div>
 
                             <div class="col-md-3">
                                 <div class="form-floating">
-                                    <input type="number" name="price_base" class="form-control"
-                                        value="{{ $listing->price_base }}" required>
+                                    <input type="number" name="price_base" class="form-control @error('price_base') is-invalid @enderror"
+                                        value="{{ old('price_base', $listing->price_base) }}" required>
                                     <label>Цена в тенге</label>
                                 </div>
+                                @error('price_base')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
                             </div>
 
                             {{-- Описание --}}
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control" name="description" placeholder="Описание">{{ $listing->description }}</textarea>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Описание">{{ old('description', $listing->description) }}</textarea>
                                     <label>Описание</label>
                                 </div>
+                                @error('description')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
                             </div>
 
                             {{-- Фото --}}
                             <div class="col-12">
                                 <label class="form-label">Фотографии объекта</label>
-                                <input type="file" name="photos[]" multiple class="form-control" accept="image/*">
+                                <input type="file" name="photos[]" multiple class="form-control @error('photos') is-invalid @enderror @error('photos.*') is-invalid @enderror" accept="image/*">
+                                @error('photos')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
+                                @error('photos.*')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
                                 <small class="text-muted">Можно выбрать сразу несколько изображений (до 4 МБ каждое)</small>
                             </div>
 

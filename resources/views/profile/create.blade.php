@@ -120,6 +120,9 @@
 
                     <div id="previewArea" class="d-flex gap-2 flex-wrap mt-3"></div>
 
+                    @error('photos')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
+                    @error('photos.*')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
+
                     <small class="text-muted">Формат: JPG, PNG, WEBP. Максимум 2 МБ.</small>
                 </div>
 
