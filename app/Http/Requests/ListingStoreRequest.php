@@ -10,7 +10,6 @@ class ListingStoreRequest extends FormRequest
     {
         return true;
     }
-
     public function rules(): array
     {
         return [
@@ -23,7 +22,7 @@ class ListingStoreRequest extends FormRequest
             'rooms'         => 'required|integer|min:1|max:20',
             'price_base'    => 'required|numeric|min:1',
             'description'   => 'nullable|string|max:2000',
-            'photos.*'      => 'nullable|mimes:jpg,jpeg,png,webp|max:10240',
+            'photos.*'      => 'nullable|mimes:jpg,jpeg,png,webp|max:2048',
             'latitude'      => 'nullable|numeric|between:-90,90',
             'longitude'     => 'nullable|numeric|between:-180,180',
         ];
@@ -50,12 +49,10 @@ class ListingStoreRequest extends FormRequest
             // 'area.required' => 'Укажите площадь.',
             'area.numeric'  => 'Площадь должна быть числом.',
             'area.min'      => 'Площадь должна быть больше 0 м².',
-
             'rooms.required' => 'Укажите количество комнат.',
             'rooms.integer'  => 'Количество комнат должно быть числом.',
             'rooms.min'      => 'Минимум 1 комната.',
             'rooms.max'      => 'Слишком много комнат.',
-
             'price_base.required' => 'Укажите цену.',
             'price_base.numeric'  => 'Цена должна быть числом.',
             'price_base.min'      => 'Цена должна быть больше 0.',
@@ -65,8 +62,9 @@ class ListingStoreRequest extends FormRequest
             'description.max'    => 'Описание слишком длинное (до 2000 символов).',
 
             // Фото
-            'photos.*.mimes' => 'Фото должно быть в формате JPG, JPEG, PNG или WEBP.',
-            'photos.*.max'   => 'Размер фото не должен превышать 2 МБ.',
+            'photos.*.uploaded' => 'Файл слишком большой или не загрузился. Максимальный размер — 2 МБ.',
+            'photos.*.mimes'    => 'Фото должно быть в формате JPG, JPEG, PNG или WEBP.',
+            'photos.*.max'      => 'Размер фото не должен превышать 2 МБ.',
         ];
     }
 }
