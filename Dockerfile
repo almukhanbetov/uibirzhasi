@@ -43,4 +43,6 @@ COPY --from=node-builder /app/public/build /var/www/public/build
 # ✅ права
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
+COPY php-custom.ini /usr/local/etc/php/conf.d/custom.ini
+
 CMD ["php-fpm"]
