@@ -161,31 +161,6 @@
                         </div>
                     </div>
 
-                    <!-- Contact Form -->
-                    <div class="contact-form">
-                        <h4>Связаться с продавцом</h4>
-                        <form action="#" method="post" class="php-email-form">
-                            @csrf
-                            <div class="row">
-                                <div class="col-12 form-group">
-                                    <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>
-                                </div>
-                                <div class="col-12 form-group">
-                                    <input type="email" name="email" class="form-control" placeholder="Ваш Email" required>
-                                </div>
-                                <div class="col-12 form-group">
-                                    <input type="tel" name="phone" class="form-control" placeholder="Ваш телефон">
-                                </div>
-                                <div class="col-12 form-group">
-                                    <textarea class="form-control" name="message" rows="4" placeholder="Ваше сообщение"></textarea>
-                                </div>
-                                <div class="col-12 text-center">
-                                    <button type="submit" class="btn btn-primary">Отправить</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
                     <!-- Social Share -->
                     <div class="social-share">
                         <h5>Поделиться</h5>
