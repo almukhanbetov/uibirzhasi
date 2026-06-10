@@ -24,7 +24,7 @@ class ProfileListingRequest extends FormRequest
             'price_base' => 'required|numeric|min:0',
             'description' => 'nullable|string|max:5000',
             'photos' => 'nullable|array|min:1',
-            'photos.*' => 'mimes:jpeg,jpg,png,webp|max:2048',
+            'photos.*' => 'mimes:jpeg,jpg,png,webp|max:10240',
         ];
     }
     public function messages(): array
@@ -57,9 +57,9 @@ class ProfileListingRequest extends FormRequest
             // 'description.required' => 'Добавьте описание.',
             'description.max' => 'Описание не может превышать 5000 символов.',
 
-            'photos.*.uploaded' => 'Файл слишком большой или не загрузился. Максимальный размер — 2 МБ.',
+            'photos.*.uploaded' => 'Файл слишком большой или не загрузился. Максимальный размер — 10 МБ.',
             'photos.*.mimes'    => 'Допустимые форматы: jpeg, jpg, png, webp.',
-            'photos.*.max'      => 'Размер каждого изображения не должен превышать 2 МБ.',
+            'photos.*.max'      => 'Размер каждого изображения не должен превышать 10 МБ.',
         ];
     }
 }

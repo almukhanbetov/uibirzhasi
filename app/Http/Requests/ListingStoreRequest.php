@@ -22,7 +22,7 @@ class ListingStoreRequest extends FormRequest
             'rooms'         => 'required|integer|min:1|max:20',
             'price_base'    => 'required|numeric|min:1',
             'description'   => 'nullable|string|max:2000',
-            'photos.*'      => 'nullable|mimes:jpg,jpeg,png,webp|max:2048',
+            'photos.*'      => 'nullable|mimes:jpg,jpeg,png,webp|max:10240',
             'latitude'      => 'nullable|numeric|between:-90,90',
             'longitude'     => 'nullable|numeric|between:-180,180',
         ];
@@ -62,9 +62,9 @@ class ListingStoreRequest extends FormRequest
             'description.max'    => 'Описание слишком длинное (до 2000 символов).',
 
             // Фото
-            'photos.*.uploaded' => 'Файл слишком большой или не загрузился. Максимальный размер — 2 МБ.',
+            'photos.*.uploaded' => 'Файл слишком большой или не загрузился. Максимальный размер — 10 МБ.',
             'photos.*.mimes'    => 'Фото должно быть в формате JPG, JPEG, PNG или WEBP.',
-            'photos.*.max'      => 'Размер фото не должен превышать 2 МБ.',
+            'photos.*.max'      => 'Размер фото не должен превышать 10 МБ.',
         ];
     }
 }

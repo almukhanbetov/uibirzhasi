@@ -148,7 +148,7 @@
                                 <input type="file" name="photos[]" multiple class="form-control @error('photos') is-invalid @enderror @error('photos.*') is-invalid @enderror" accept="image/*">
                                 @error('photos')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
                                 @error('photos.*')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
-                                <small class="text-muted">Можно выбрать сразу несколько изображений (до 4 МБ каждое)</small>
+                                <small class="text-muted">Можно выбрать сразу несколько изображений (до 10 МБ каждое)</small>
                             </div>
 
                             {{-- Кнопка сохранения --}}

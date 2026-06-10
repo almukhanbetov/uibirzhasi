@@ -123,7 +123,7 @@
                     @error('photos')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
                     @error('photos.*')<div class="invalid-feedback d-block small text-danger mt-1">{{ $message }}</div>@enderror
 
-                    <small class="text-muted">Формат: JPG, PNG, WEBP. Максимум 2 МБ.</small>
+                    <small class="text-muted">Формат: JPG, PNG, WEBP. Максимум 10 МБ.</small>
                 </div>
 
                 {{-- Сохранить --}}

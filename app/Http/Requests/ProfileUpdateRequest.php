@@ -32,7 +32,7 @@ class ProfileUpdateRequest extends FormRequest
             'rooms' => 'required|integer|min:1',
             'price_base' => 'required|numeric|min:0',
             'description' => 'nullable|string|max:5000',
-            'photos.*' => 'nullable|mimes:jpeg,jpg,png,webp|max:2048',
+            'photos.*' => 'nullable|mimes:jpeg,jpg,png,webp|max:10240',
         ];
     }
     public function messages(): array
@@ -57,8 +57,9 @@ class ProfileUpdateRequest extends FormRequest
             'rooms.required' => 'Укажите количество комнат',
             'price_base.required' => 'Укажите цену',
             // 'description.required' => 'Добавьте описание',
-            'photos.*.image' => 'Каждый файл должен быть изображением',
-            'photos.*.max' => 'Размер фото не должен превышать 4 МБ',
+            'photos.*.uploaded' => 'Файл слишком большой или не загрузился. Максимальный размер — 10 МБ.',
+            'photos.*.mimes'    => 'Допустимые форматы: jpeg, jpg, png, webp.',
+            'photos.*.max'      => 'Размер фото не должен превышать 10 МБ.',
         ];
     }
 }
