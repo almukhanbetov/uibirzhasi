@@ -2,6 +2,14 @@
 <html lang="ru">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18244312936"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-18244312936');
+    </script>
     <meta charset="UTF-8">
     <title>Админка недвижимости</title>
     <link href="{{ asset('profile/css/bootstrap.min.css') }}" rel="stylesheet">
