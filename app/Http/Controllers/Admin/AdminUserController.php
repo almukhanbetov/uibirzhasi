@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -22,8 +23,9 @@ class AdminUserController extends Controller
         }
 
         $users = $query->paginate(12)->withQueryString();
+        $roles = Role::all();
 
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('users', 'roles'));
     }
 
     public function show(string $id)
@@ -33,6 +35,14 @@ class AdminUserController extends Controller
 
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'role_id' => 'required|exists:roles,id',
+        ]);
+
+        $user->update(['role_id' => $request->role_id]);
+
+        return back()->with('success', "Роль пользователя «{$user->name}» обновлена.");
     }
 }
