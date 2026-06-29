@@ -44,7 +44,12 @@ class AdminUserController extends Controller
         return view('admin.users.index', compact('users', 'roles'));
     }
 
-    public function show(string $id): void {}
+    public function show(string $id)
+    {
+        $user = User::with(['role', 'listings.photos'])->withCount(['listings', 'deposits'])->findOrFail($id);
+        $roles = Role::all();
+        return view('admin.users.show', compact('user', 'roles'));
+    }
 
     public function update(Request $request, string $id)
     {
