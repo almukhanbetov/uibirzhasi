@@ -134,7 +134,7 @@
             <span class="text-slate-500 font-normal text-sm ml-2">({{ $user->listings_count }})</span>
         </h3>
 
-        @if($user->listings->isEmpty())
+        @if($listings->isEmpty())
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-12 text-center text-slate-500">
                 <svg class="w-12 h-12 mx-auto mb-3 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -144,15 +144,24 @@
             </div>
         @else
             <div class="flex flex-col gap-3">
-                @foreach($user->listings as $listing)
+                @foreach($listings as $listing)
+                @php
+                    $photo = $listing->photos->first();
+                    $photoUrl = $photo
+                        ? (str_starts_with($photo->url, 'http')
+                            ? $photo->url
+                            : asset(ltrim($photo->url, '/')))
+                        : null;
+                @endphp
                 <div class="bg-slate-800 border border-slate-700 hover:border-slate-600 rounded-2xl p-4 flex gap-4 transition-colors">
 
                     {{-- Фото --}}
                     <div class="w-20 h-20 flex-shrink-0 rounded-xl overflow-hidden bg-slate-700">
-                        @if($listing->photos->isNotEmpty())
-                            <img src="{{ asset($listing->photos->first()->url) }}"
+                        @if($photoUrl)
+                            <img src="{{ $photoUrl }}"
                                  class="w-full h-full object-cover"
-                                 alt="фото">
+                                 alt="фото"
+                                 onerror="this.style.display='none'">
                         @else
                             <div class="w-full h-full flex items-center justify-center text-slate-600">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,11 +178,12 @@
                         <p class="text-slate-400 text-xs mt-1 truncate">{{ $listing->city?->name ?? '—' }}, {{ $listing->district?->name ?? '' }}</p>
                         <p class="text-slate-500 text-xs mt-1">{{ $listing->created_at->format('d.m.Y') }}</p>
                         <div class="flex items-center gap-2 mt-2">
-                            @if($listing->is_active ?? true)
-                                <span class="px-2 py-0.5 text-xs rounded-full bg-green-500/20 text-green-400 border border-green-500/30">Активно</span>
-                            @else
-                                <span class="px-2 py-0.5 text-xs rounded-full bg-slate-600/50 text-slate-400 border border-slate-600">Неактивно</span>
-                            @endif
+                            <span class="px-2 py-0.5 text-xs rounded-full
+                                {{ $listing->status === 'active'
+                                    ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                                    : 'bg-slate-600/50 text-slate-400 border border-slate-600' }}">
+                                {{ $listing->status === 'active' ? 'Активно' : ucfirst($listing->status) }}
+                            </span>
                         </div>
                     </div>
 
