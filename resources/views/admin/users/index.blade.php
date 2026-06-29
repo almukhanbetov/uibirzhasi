@@ -157,7 +157,7 @@
     </div>
 
     <div class="mt-8">
-        {{ $users->links() }}
+        {{ $users->links('vendor.pagination.admin-dark') }}
     </div>
 @endif
 
