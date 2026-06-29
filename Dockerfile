@@ -1,6 +1,3 @@
-# -------------------------------
-# 1️⃣ Frontend build (Vite)
-# -------------------------------
 FROM node:22-alpine AS node-builder
 WORKDIR /app
 
