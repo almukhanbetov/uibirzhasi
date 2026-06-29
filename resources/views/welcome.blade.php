@@ -73,10 +73,10 @@
                     </div>
                 </div>
             </div>
-            <div class="row align-items-center g-5">
+            <div class="row align-items-stretch g-5">
                 {{-- 📝 Форма --}}
                 <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
-                    <div class="p-4 rounded-4 shadow-lg bg-white" style="backdrop-filter: blur(8px);">
+                    <div class="p-4 rounded-4 shadow-lg bg-white h-100" style="backdrop-filter: blur(8px);">
                         <h2 class="text-center mb-4 fw-bold text-success">Поиск объявления</h2>
                         <form id="filterForm" method="GET" action="{{ route('listings.index') }}"
                             class="row g-3 align-items-end">
@@ -167,38 +167,36 @@
                         </form>
                     </div>
                 </div>
-                {{-- 🏞 Правая картинка --}}
+                {{-- 🏞 Правая колонка: QR + текст --}}
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
-                    <div class="position-relative">
-                        {{-- <img src="{{ asset('assets/img/real-estate/property-exterior-3.webp') }}"
-                            class="img-fluid rounded-4 shadow-lg" alt="Property"> --}}
-                        <img src="{{ asset('images/payments/halyk-qr.jpeg') }}"
-                            class="img-fluid rounded-4 shadow-lg bg-white p-3"
-                            style="max-height: 420px; object-fit: contain;" alt="Halyk QR">
+                    <div class="p-4 rounded-4 shadow-lg bg-white h-100 d-flex align-items-center gap-4">
 
-                        {{-- <div class="position-absolute top-0 end-0 bg-success text-white px-3 py-2 rounded-end-4 rounded-bottom-0 fw-semibold"
-                            style="border-top-right-radius: 1rem;">
-                            855 000 000 • РЕКОМЕНДУЕМЫЕ
-                        </div> --}}
-                        {{-- <div class="position-absolute bottom-0 start-0 bg-white p-3 rounded-4 shadow-sm m-3"
-                            style="max-width: 250px;">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('assets/img/real-estate/agent-4.webp') }}" class="rounded-circle me-2"
-                                    width="40" height="40" alt="Agent">
-                                <div>
-                                    <h6 class="mb-0 fw-bold text-dark">Аимбетов Жусуп</h6>
-                                    <small class="text-muted">ТОО "CPA"</small>
-                                </div>
-                            </div>
-                            <div class="mt-2 text-warning small">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-half"></i>
-                                <span class="text-muted ms-1">4.9 (127)</span>
-                            </div>
-                        </div> --}}
+                        {{-- QR код --}}
+                        <div class="flex-shrink-0 text-center">
+                            <img src="{{ asset('images/payments/halyk-qr.jpeg') }}"
+                                class="rounded-3 shadow-sm"
+                                style="width: 180px; height: 180px; object-fit: contain;"
+                                alt="Halyk QR">
+                            <p class="text-muted mt-2 mb-0" style="font-size: 11px;">Halyk QR</p>
+                        </div>
+
+                        {{-- Текст справа от QR --}}
+                        <div>
+                            <p class="text-secondary mb-3" style="font-size: 14px; line-height: 1.7;">
+                                Вы можете получить телефонный номер продавца любого объекта недвижимости,
+                                находящегося на данном сайте, внеся по данному QR‑коду депозит в размере
+                                <strong class="text-dark">1% от текущей стоимости объекта</strong>
+                                и набрав номер
+                                <a href="tel:+77027897120" class="text-success fw-semibold text-decoration-none">
+                                    +7 702 789-71-20
+                                </a>.
+                            </p>
+                            <p class="text-secondary mb-0" style="font-size: 14px; line-height: 1.7;">
+                                Если сделка не состоялась — депозит будет возвращён на ту же карту,
+                                с которой был внесён, <strong class="text-dark">в течение одного дня</strong>.
+                            </p>
+                        </div>
+
                     </div>
                 </div>
             </div>
