@@ -16,9 +16,25 @@ class AdminUserController extends Controller
             ->latest();
 
         if ($search = $request->input('search')) {
-            $query->where(function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('phone', 'like', "%{$search}%");
+            // Нормализуем телефон: 8777... → +7777..., убираем лишние символы
+            $phoneVariants = [$search];
+            $digits = preg_replace('/\D/', '', $search);
+            if ($digits) {
+                $phoneVariants[] = $digits;
+                if (str_starts_with($digits, '8') && strlen($digits) === 11) {
+                    $phoneVariants[] = '+7' . substr($digits, 1);
+                }
+                if (str_starts_with($digits, '7') && strlen($digits) === 11) {
+                    $phoneVariants[] = '+' . $digits;
+                    $phoneVariants[] = '8' . substr($digits, 1);
+                }
+            }
+
+            $query->where(function ($q) use ($search, $phoneVariants) {
+                $q->where('name', 'like', "%{$search}%");
+                foreach ($phoneVariants as $variant) {
+                    $q->orWhere('phone', 'like', "%{$variant}%");
+                }
             });
         }
 
@@ -28,10 +44,7 @@ class AdminUserController extends Controller
         return view('admin.users.index', compact('users', 'roles'));
     }
 
-    public function show(string $id)
-    {
-        //
-    }
+    public function show(string $id): void {}
 
     public function update(Request $request, string $id)
     {
