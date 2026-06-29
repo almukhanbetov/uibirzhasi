@@ -32,7 +32,7 @@
                           <input class="form-check-input" type="checkbox" value="1" id="remember" name="remember">
                           <label class="form-check-label" for="remember">Запомните меня</label>
                       </div>
-                      <a href="#" class="col_1">Забыли пароль?</a>
+                      <a href="{{ route('password.request') }}" class="col_1">Забыли пароль?</a>
                   </div>
 
                   <h6 class="mt-4 mb-0">
