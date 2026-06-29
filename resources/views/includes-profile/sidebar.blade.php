@@ -19,9 +19,15 @@
                 <span class="me-2">🏡</span> Добавить объявление
             </a>
         </li>
-        <li class="nav-item">
-            <a href="{{ route('profile.matches.index') }}" class="nav-link sidebar-link">
+        <li class="nav-item mb-2">
+            <a href="{{ route('profile.matches.index') }}" class="nav-link sidebar-link {{ request()->routeIs('profile.matches.*') ? 'active' : '' }}">
                 🧩 Найденные пары
+            </a>
+        </li>
+        <li class="nav-item mb-2">
+            <a href="{{ route('profile.password.form') }}"
+                class="nav-link sidebar-link {{ request()->routeIs('profile.password.*') ? 'active' : '' }}">
+                🔑 Изменить пароль
             </a>
         </li>
         <li class="my-3">

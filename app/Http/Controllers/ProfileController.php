@@ -205,4 +205,31 @@ class ProfileController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    public function passwordForm(): View
+    {
+        return view('profile.password');
+    }
+
+    public function passwordUpdate(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'current_password'      => ['required', 'current_password'],
+            'password'              => ['required', 'min:6', 'confirmed'],
+            'password_confirmation' => ['required'],
+        ], [
+            'current_password.required'  => 'Введите текущий пароль.',
+            'current_password.current_password' => 'Текущий пароль неверный.',
+            'password.required'          => 'Введите новый пароль.',
+            'password.min'               => 'Пароль должен быть не менее 6 символов.',
+            'password.confirmed'         => 'Пароли не совпадают.',
+            'password_confirmation.required' => 'Повторите новый пароль.',
+        ]);
+
+        Auth::user()->update([
+            'password' => bcrypt($request->password),
+        ]);
+
+        return back()->with('success', 'Пароль успешно изменён.');
+    }
 }

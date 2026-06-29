@@ -125,6 +125,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/matches/{match}', [MatchController::class, 'show'])->name('profile.matches.show');
     Route::post('/listings',        [ListingController::class, 'store'])->name('listings.store');
     Route::get('/profile/index', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/password', [ProfileController::class, 'passwordForm'])->name('profile.password.form');
+    Route::post('/profile/password', [ProfileController::class, 'passwordUpdate'])->name('profile.password.update');
     Route::get('/profile/create', [ProfileController::class, 'create'])->name('profile.create');
     Route::post('/profile/store', [ProfileController::class, 'store'])->name('profile.store');
     Route::get('/profile/{listing}', [ProfileController::class, 'show'])->name('profile.show');
