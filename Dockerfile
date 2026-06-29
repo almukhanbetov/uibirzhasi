@@ -42,4 +42,6 @@ RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 COPY php-custom.ini /usr/local/etc/php/conf.d/custom.ini
 
+RUN php artisan storage:link --force || true
+
 CMD ["php-fpm"]
