@@ -1,29 +1,35 @@
 name: CI/CD Deploy to VPS
+
 on:
   push:
     branches: [main]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Install Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22          
+          node-version: 22
+
       - name: Cache node modules
         uses: actions/cache@v3
         with:
           path: ~/.npm
           key: npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: npm-    
+          restore-keys: npm-
+
       - name: Install frontend deps
         run: npm install
         working-directory: .
 
       - name: Build frontend
-        run: npm run build  
+        run: npm run build
         working-directory: .
 
       - name: Login Docker Hub
@@ -31,7 +37,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build & Push
+
+      - name: Build and push Laravel app image
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -43,6 +50,18 @@ jobs:
             almuko/uibirzhasi-app:${{ github.sha }}
           build-args: |
             APP_BUILD=${{ github.sha }}
+
+      - name: Build and push Nginx image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: nginx.dockerfile
+          push: true
+          no-cache: true
+          tags: |
+            almuko/uibirzhasi-web:latest
+            almuko/uibirzhasi-web:${{ github.sha }}
+
       - name: Deploy on VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -54,9 +73,12 @@ jobs:
           script_stop: true
           script: |
             set -e
+
             cd ${{ secrets.VPS_PATH }}
+
             echo "APP_BUILD=${{ github.sha }}" >> .env
+
             docker compose pull
             docker compose up -d --force-recreate
-            # 🧹 очистка старых образов (безопасно)
+
             docker image prune -f
