@@ -5,47 +5,25 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <div class="login_1">
-                    <h3 class="col_1">Восстановление <span class="col_4">пароля</span></h3>
+                <div class="login_1 text-center">
+                    <h3 class="col_1">Забыли <span class="col_4">пароль?</span></h3>
 
-                    <p class="text-muted mt-3 mb-4" style="font-size: 14px;">
-                        Введите email, указанный при регистрации — мы отправим ссылку для сброса пароля.
+                    <p class="text-muted mt-3 mb-4" style="font-size: 15px; line-height: 1.7;">
+                        Регистрация на сайте производится по номеру телефона.<br>
+                        Для восстановления пароля позвоните нам:
                     </p>
 
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    <a href="tel:+77027897120"
+                       class="btn btn-success btn-lg px-5 mb-3"
+                       style="font-size: 20px; letter-spacing: 1px; border-radius: 50px;">
+                        <i class="bi bi-telephone-fill me-2"></i>+7 702 789-71-20
+                    </a>
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul class="mb-0">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                    <p class="text-muted mt-2 mb-4" style="font-size: 13px;">
+                        Администратор сбросит ваш пароль и сообщит новый.
+                    </p>
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
-
-                        <h6 style="margin-top: 20px;">Email</h6>
-                        <input type="email" name="email" class="form-control"
-                            placeholder="example@mail.com"
-                            value="{{ old('email') }}" required autofocus>
-
-                        <h6 class="mt-4 mb-0">
-                            <button class="btn btn-success" type="submit">
-                                Отправить ссылку <i style="margin-left:5px;" class="fa fa-envelope"></i>
-                            </button>
-                        </h6>
-
-                        <p class="mt-4 mb-0">
-                            <a class="col_1" href="{{ route('login') }}">← Вернуться ко входу</a>
-                        </p>
-                    </form>
+                    <a class="col_1" href="{{ route('login') }}">← Вернуться ко входу</a>
                 </div>
             </div>
         </div>

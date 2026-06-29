@@ -138,6 +138,18 @@
                         </button>
                     </div>
                 </form>
+
+                {{-- Сброс пароля --}}
+                <form action="{{ route('admin.users.update', $user->id) }}" method="POST" class="mt-2"
+                      onsubmit="return confirm('Сбросить пароль для {{ addslashes($user->name) }}?')">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="reset_password" value="1">
+                    <button type="submit"
+                        class="w-full px-3 py-1.5 bg-red-700 hover:bg-red-600 text-white text-xs rounded-lg transition-colors">
+                        🔑 Сбросить пароль
+                    </button>
+                </form>
             </div>
 
         </div>

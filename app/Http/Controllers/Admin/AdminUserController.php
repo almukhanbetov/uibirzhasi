@@ -37,12 +37,18 @@ class AdminUserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $request->validate([
-            'role_id' => 'required|exists:roles,id',
-        ]);
+        if ($request->has('role_id')) {
+            $request->validate(['role_id' => 'required|exists:roles,id']);
+            $user->update(['role_id' => $request->role_id]);
+            return back()->with('success', "Роль пользователя «{$user->name}» обновлена.");
+        }
 
-        $user->update(['role_id' => $request->role_id]);
+        if ($request->has('reset_password')) {
+            $newPassword = rand(100000, 999999);
+            $user->update(['password' => bcrypt($newPassword)]);
+            return back()->with('success', "Новый пароль для «{$user->name}» ({$user->phone}): {$newPassword}");
+        }
 
-        return back()->with('success', "Роль пользователя «{$user->name}» обновлена.");
+        return back();
     }
 }
