@@ -1,23 +1,22 @@
 @extends('layouts.guest')
 @section('content')
 
-    {{-- Акционный баннер --}}
-    <div style="background: linear-gradient(90deg, #b91c1c 0%, #dc2626 50%, #b91c1c 100%); padding: 14px 0;">
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-center gap-3 flex-wrap text-white text-center">
-                <span style="font-size: 22px;">🔥</span>
-                <span style="font-size: 1.15rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 1px 4px rgba(0,0,0,0.3);">
-                    АКЦИЯ:&nbsp; КОМИССИЯ САЙТА&nbsp;
-                    <span style="font-size: 1.4rem; color: #fde68a;">0,1%</span>
-                    &nbsp;!&nbsp; ВСЕГО ОДИН МЕСЯЦ&nbsp;!
-                </span>
-                <span style="font-size: 22px;">🔥</span>
-            </div>
-        </div>
-    </div>
-
     <section id="hero" class="hero section mt-5">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+            {{-- Акционный баннер --}}
+            <div style="background: linear-gradient(90deg, #b91c1c 0%, #dc2626 50%, #b91c1c 100%); padding: 13px 0; border-radius: 12px; margin-bottom: 32px;">
+                <div class="d-flex align-items-center justify-content-center gap-3 flex-wrap text-white text-center px-3">
+                    <span style="font-size: 22px;">🔥</span>
+                    <span style="font-size: 1.15rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 1px 4px rgba(0,0,0,0.3);">
+                        АКЦИЯ:&nbsp; КОМИССИЯ САЙТА&nbsp;
+                        <span style="font-size: 1.4rem; color: #fde68a;">0,1%</span>
+                        &nbsp;!&nbsp; ВСЕГО ОДИН МЕСЯЦ&nbsp;!
+                    </span>
+                    <span style="font-size: 22px;">🔥</span>
+                </div>
+            </div>
+
             {{-- ⭐ Заголовок --}}
             <div class="text-center mb-5" data-aos="fade-up" data-aos-delay="150">
                 <p class="text-uppercase fw-semibold text-success mb-2" style="letter-spacing: 1.5px;">
@@ -189,10 +188,8 @@
 
                         {{-- QR код --}}
                         <div class="flex-shrink-0 text-center">
-                            <img src="{{ asset('images/payments/halyk-qr.jpeg') }}"
-                                class="rounded-3 shadow-sm"
-                                style="width: 180px; height: 180px; object-fit: contain;"
-                                alt="Halyk QR">
+                            <img src="{{ asset('images/payments/halyk-qr.jpeg') }}" class="rounded-3 shadow-sm"
+                                style="width: 180px; height: 180px; object-fit: contain;" alt="Halyk QR">
                             <p class="text-muted mt-2 mb-0" style="font-size: 11px;">Halyk QR</p>
                         </div>
 
@@ -233,11 +230,11 @@
         <div class="container" data-aos="fade-up">
             <div class="text-center mb-5">
                 <!-- <p class="text-uppercase fw-semibold text-success mb-2" style="letter-spacing: 1.5px; font-size: 13px;">
-                                                                    Оплата
-                                                                </p>
-                                                                <h2 class="fw-bold text-dark mb-2" style="font-family: 'Poppins', sans-serif;">
-                                                                    Способы оплаты
-                                                                </h2> -->
+                                                                            Оплата
+                                                                        </p>
+                                                                        <h2 class="fw-bold text-dark mb-2" style="font-family: 'Poppins', sans-serif;">
+                                                                            Способы оплаты
+                                                                        </h2> -->
                 <!-- <p class="text-muted">Прозрачные тарифы без скрытых платежей</p> -->
             </div>
             <div class="row g-4 justify-content-center">
