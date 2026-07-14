@@ -1,5 +1,21 @@
 @extends('layouts.guest')
 @section('content')
+
+    {{-- Акционный баннер --}}
+    <div style="background: linear-gradient(90deg, #b91c1c 0%, #dc2626 50%, #b91c1c 100%); padding: 14px 0;">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center gap-3 flex-wrap text-white text-center">
+                <span style="font-size: 22px;">🔥</span>
+                <span style="font-size: 1.15rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 1px 4px rgba(0,0,0,0.3);">
+                    АКЦИЯ:&nbsp; КОМИССИЯ САЙТА&nbsp;
+                    <span style="font-size: 1.4rem; color: #fde68a;">0,1%</span>
+                    &nbsp;!&nbsp; ВСЕГО ОДИН МЕСЯЦ&nbsp;!
+                </span>
+                <span style="font-size: 22px;">🔥</span>
+            </div>
+        </div>
+    </div>
+
     <section id="hero" class="hero section mt-5">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             {{-- ⭐ Заголовок --}}
