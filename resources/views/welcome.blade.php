@@ -184,7 +184,11 @@
                 </div>
                 {{-- 🏞 Правая колонка: QR + текст --}}
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
-                    <div class="p-4 rounded-4 shadow-lg bg-white h-100 d-flex align-items-center gap-4">
+                    <div class="p-4 rounded-4 shadow-lg bg-white h-100 d-flex flex-column">
+                        <p class="text-success fw-semibold text-center mb-3" style="font-size: 13px;">
+                            QR‑единый для всех банков, в том числе для приложения Каспи банка
+                        </p>
+                        <div class="d-flex align-items-center gap-4">
 
                         {{-- QR код --}}
                         <div class="flex-shrink-0 text-center">
@@ -210,6 +214,7 @@
                             </p>
                         </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
